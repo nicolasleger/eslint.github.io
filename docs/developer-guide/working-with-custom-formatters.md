@@ -1,12 +1,13 @@
 ---
-title: Documentation
+title: Working with Custom Formatters
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/working-with-custom-formatters.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Working with custom formatters
+# Working with Custom Formatters
 
-Writing an [eslint](https://github.com/eslint/eslint) custom formatter is simple. All is neeeded is a module that exports a function that will receive the results from the execution of [eslint](https://github.com/eslint/eslint).
+Writing an ESLint custom formatter is simple. All that is needed is a module that exports a function that will receive the results from the execution of ESLint.
 
 The simplest formatter will be something like:
 
@@ -34,23 +35,24 @@ The output of the previous command will be something like this
                 "ruleId": "curly",
                 "severity": 2,
                 "message": "Expected { after 'if' condition.",
-                "line": 41,
-                "column": 2,
+                "line": 2,
+                "column": 1,
                 "nodeType": "IfStatement",
-                "source": "  if ( err ) console.log( 'failed tests: ' + err );"
+                "source": "if (err) console.log('failed tests: ' + err);"
             },
             {
                 "ruleId": "no-process-exit",
                 "severity": 2,
                 "message": "Don't use process.exit(); throw an error instead.",
-                "line": 42,
-                "column": 2,
+                "line": 3,
+                "column": 1,
                 "nodeType": "CallExpression",
-                "source": "  process.exit( exitCode );"
+                "source": "process.exit(1);"
             }
         ],
         "errorCount": 2,
-        "warningCount": 0
+        "warningCount": 0,
+        "source": "var err = doStuff();\nif (err) console.log('failed tests: ' + err);\nprocess.exit(1);\n"
     },
     {
         "filePath": "Gruntfile.js",
@@ -72,20 +74,24 @@ the list of messages for `errors` and/or `warnings`.
 
 The following are the fields of the result object:
 
-- **filePath**: The path to the file relative to the current working directory (the path from which eslint was executed).
-- **messages**: An array of message objects. See below for more info about messages
-- **errorCount**: The number of errors for the given file
-- **warningCount**: the number of warnings for the give file
+- **filePath**: The path to the file relative to the current working directory (the path from which ESLint was executed).
+- **messages**: An array of message objects. See below for more info about messages.
+- **errorCount**: The number of errors for the given file.
+- **warningCount**: The number of warnings for the given file.
+- **source**: The source code for the given file. This property is omitted if this file has no errors/warnings or if the `output` property is present.
+- **output**: The source code for the given file with as many fixes applied as possible. This property is omitted if no fix is available.
 
 ### The message object
 
 - **ruleId**: the id of the rule that produced the error or warning.
 - **severity**: the severity of the failure, `1` for warnings and `2` for errors.
 - **message**: the human readable description of the error.
-- **line**: the line where where the issue is located.
-- **column**: the colum where the issue is located.
-- **nodeType**: the type of the node in the [AST](https://github.com/estree/estree/blob/master/spec)
-- **source**: a extract of the code the line where the failure happened.
+- **line**: the line where the issue is located.
+- **column**: the column where the issue is located.
+- **nodeType**: the type of the node in the [AST](https://github.com/estree/estree/blob/master/spec.md#node-objects)
+- **source**: an extract of the code the line where the failure happened.
+
+**Please note**: the `source` property will be removed from the message object in an upcoming breaking release. If you depend on this property, you should now use the `source` or `output` properties from [the result object](#the-result-object) instead.
 
 ## Examples
 
@@ -272,7 +278,7 @@ And then the formatter can read from stdin
 eslint -f './json.js' | ./my-awesome-formatter-cli.js --skip-warnings
 ```
 
-And the the content of **my-awesome-formatter-cli.js** would be something like:
+And the content of **my-awesome-formatter-cli.js** would be something like:
 
 ```javascript
 #!/usr/bin/env node
@@ -307,7 +313,7 @@ More complex formatters could be written by grouping differently the errors and 
 When printing the files a recommended format will be something like this:
 
 ```bash
-file:line:colum
+file:line:column
 ```
 
 Since that allows modern fancy terminals (like [iTerm2](https://www.iterm2.com/) or [Guake](http://guake-project.org/)) to make them link to files that open in your favorite text editor.

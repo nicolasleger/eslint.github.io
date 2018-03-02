@@ -1,6 +1,7 @@
 ---
-title: Rule no-script-url
+title: no-script-url - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-script-url.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -24,7 +25,7 @@ location.href = "javascript:void(0)";
 
 ## Further Reading
 
-* [What is the matter with script-targeted URLs?](http://stackoverflow.com/questions/13497971/what-is-the-matter-with-script-targeted-urls)
+* [What is the matter with script-targeted URLs?](https://stackoverflow.com/questions/13497971/what-is-the-matter-with-script-targeted-urls)
 
 ## Version
 

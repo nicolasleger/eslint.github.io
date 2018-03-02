@@ -1,10 +1,13 @@
 ---
-title: Rule no-unused-vars
+title: no-unused-vars - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-unused-vars.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow Unused Variables (no-unused-vars)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Variables that are declared and not used anywhere in the code are most likely an error due to incomplete refactoring. Such variables take up space in the code and can lead to confusion by readers.
 
@@ -17,6 +20,7 @@ A variable is considered to be used if any of the following are true:
 * It represents a function that is called (`doSomething()`)
 * It is read (`var y = x`)
 * It is passed into a function as an argument (`doSomething(x)`)
+* It is read inside of a function that is passed to another function (`doSomething(function() { foo(); })`)
 
 A variable is *not* considered to be used if it is only ever assigned to (`var x = 5`) or declared.
 
@@ -26,13 +30,18 @@ Examples of **incorrect** code for this rule:
 /*eslint no-unused-vars: "error"*/
 /*global some_unused_var*/
 
-//It checks variables you have defined as global
+// It checks variables you have defined as global
 some_unused_var = 42;
 
 var x;
 
+// Write-only variables are not considered as used.
 var y = 10;
 y = 5;
+
+// A read for a modification of itself is not considered as used.
+var z = 0;
+z = z + 1;
 
 // By default, unused arguments cause warnings.
 (function(foo) {
@@ -43,6 +52,11 @@ y = 5;
 function fact(n) {
     if (n < 2) return 1;
     return n * fact(n - 1);
+}
+
+// When a function definition destructures an array, unused entries from the array also cause warnings.
+function getY([x, y]) {
+    return y;
 }
 ```
 
@@ -62,6 +76,17 @@ myFunc(function foo() {
 (function(foo) {
     return foo;
 })();
+
+var myFunc;
+myFunc = setTimeout(function() {
+    // myFunc is considered used
+    myFunc();
+}, 50);
+
+// Only the second argument from the descructured array is used.
+function getY([, y]) {
+    return y;
+}
 ```
 
 ### exported
@@ -74,6 +99,16 @@ Note that `/* exported */` has no effect for any of the following:
 * when `parserOptions.sourceType` is `module`
 * when `ecmaFeatures.globalReturn` is `true`
 
+The line comment `// exported variableName` will not work as `exported` is not line-specific.
+
+Examples of **correct** code for `/* exported variableName */` operation:
+
+```js
+/* exported global_var */
+
+var global_var = 42;
+```
+
 ## Options
 
 This rule takes one argument which can be a string or an object. The string settings are the same as those of the `vars` property (explained below).
@@ -83,7 +118,7 @@ By default this rule is enabled with `all` option for variables and `after-used`
 ```json
 {
     "rules": {
-        "no-unused-vars": ["error", { "vars": "all", "args": "after-used" }]
+        "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
     }
 }
 ```
@@ -177,6 +212,18 @@ Examples of **correct** code for the `{ "args": "none" }` option:
 (function(foo, bar, baz) {
     return bar;
 })();
+```
+
+### ignoreRestSiblings
+
+The `ignoreRestSiblings` option is a boolean (default: `false`). Using a [Rest Property](https://github.com/tc39/proposal-object-rest-spread) it is possible to "omit" properties from an object, but by default the sibling properties are marked as "unused". With this option enabled the rest property's siblings are ignored.
+
+Examples of **correct** code for the `{ "ignoreRestSiblings": true }` option:
+
+```js
+/*eslint no-unused-vars: ["error", { "ignoreRestSiblings": true }]*/
+// 'type' is ignored because it has a rest property sibling.
+var { type, ...coords } = data;
 ```
 
 ### argsIgnorePattern

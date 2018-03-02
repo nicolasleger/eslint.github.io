@@ -1,6 +1,7 @@
 ---
-title: Rule no-process-env
+title: no-process-env - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-process-env.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -41,8 +42,8 @@ If prefer to use `process.env` throughout your project to retrieve values from e
 
 ## Further Reading
 
-* [How to store Node.js deployment settings/configuration files? - Stack Overflow](http://stackoverflow.com/questions/5869216/how-to-store-node-js-deployment-settings-configuration-files)
-* [Storing Node.js application config data - Ben Hall's blog](http://blog.benhall.me.uk/2012/02/storing-application-config-data-in/)
+* [How to store Node.js deployment settings/configuration files? - Stack Overflow](https://stackoverflow.com/questions/5869216/how-to-store-node-js-deployment-settings-configuration-files)
+* [Storing Node.js application config data - Ben Hall's blog](https://blog.benhall.me.uk/2012/02/storing-application-config-data-in/)
 
 ## Version
 

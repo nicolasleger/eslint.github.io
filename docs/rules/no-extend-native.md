@@ -1,6 +1,7 @@
 ---
-title: Rule no-extend-native
+title: no-extend-native - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extend-native.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -35,7 +36,7 @@ Disallows directly modifying the prototype of builtin objects.
 Examples of **incorrect** code for this rule:
 
 ```js
-/*eslint no-extend-native: 2*/
+/*eslint no-extend-native: "error"*/
 
 Object.prototype.a = "a";
 Object.defineProperty(Array.prototype, "times", { value: 999 });
@@ -78,7 +79,7 @@ You may want to disable this rule when working with polyfills that try to patch 
 
 ## Related Rules
 
-* [no-native-reassign](no-native-reassign)
+* [no-global-assign](no-global-assign)
 
 ## Version
 

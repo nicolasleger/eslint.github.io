@@ -1,12 +1,13 @@
 ---
-title: Rule no-multi-spaces
+title: no-multi-spaces - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-multi-spaces.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow multiple spaces (no-multi-spaces)
 
-(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Multiple spaces in a row that are not used for indentation are typically mistakes. For example:
 
@@ -62,11 +63,55 @@ a ? b: c
 
 ## Options
 
-To avoid contradictions if some other rules require multiple spaces, this rule has an option to ignore certain node types in the abstract syntax tree (AST) of JavaScript code.
+This rule's configuration consists of an object with the following properties:
+
+* `"ignoreEOLComments": true` (defaults to `false`) ignores multiple spaces before comments that occur at the end of lines
+* `"exceptions": { "Property": true }` (`"Property"` is the only node specified by default) specifies nodes to ignore
+
+### ignoreEOLComments
+
+Examples of **incorrect** code for this rule with the `{ "ignoreEOLComments": false }` (default) option:
+
+```js
+/*eslint no-multi-spaces: ["error", { ignoreEOLComments: false }]*/
+
+var x = 5;      // comment
+var x = 5;      /* multiline
+ * comment
+ */
+```
+
+Examples of **correct** code for this rule with the `{ "ignoreEOLComments": false }` (default) option:
+
+```js
+/*eslint no-multi-spaces: ["error", { ignoreEOLComments: false }]*/
+
+var x = 5; // comment
+var x = 5; /* multiline
+ * comment
+ */
+```
+
+Examples of **correct** code for this rule with the `{ "ignoreEOLComments": true }` option:
+
+```js
+/*eslint no-multi-spaces: ["error", { ignoreEOLComments: true }]*/
+
+var x = 5; // comment
+var x = 5;      // comment
+var x = 5; /* multiline
+ * comment
+ */
+var x = 5;      /* multiline
+ * comment
+ */
+```
 
 ### exceptions
 
-The `exceptions` object expects property names to be AST node types as defined by [ESTree](https://github.com/estree/estree). The easiest way to determine the node types for `exceptions` is to use the [online demo](http://eslint.org/parser).
+To avoid contradictions with other rules that require multiple spaces, this rule has an `exceptions` option to ignore certain nodes.
+
+This option is an object that expects property names to be AST node types as defined by [ESTree](https://github.com/estree/estree). The easiest way to determine the node types for `exceptions` is to use the [online demo](https://eslint.org/parser).
 
 Only the `Property` node type is ignored by default, because for the [key-spacing](key-spacing) rule some alignment options require multiple spaces in properties of object literals.
 

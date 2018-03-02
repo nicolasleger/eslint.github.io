@@ -1,16 +1,19 @@
 ---
-title: Rule no-undef
+title: no-undef - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-undef.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow Undeclared Variables (no-undef)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 This rule can help you locate potential ReferenceErrors resulting from misspellings of variable and parameter names, or accidental implicit globals (for example, from forgetting the `var` keyword in a `for` loop initializer).
 
 ## Rule Details
 
-Any reference to an undeclared variable causes a warning, unless the variable is explicitly mentioned in a `/*global ...*/` comment.
+Any reference to an undeclared variable causes a warning, unless the variable is explicitly mentioned in a `/*global ...*/` comment, or specified in the [`globals` key in the configuration file](https://eslint.org/docs/user-guide/configuring#specifying-globals). A common use case for these is if you intentionally use globals that are defined elsewhere (e.g. in a script sourced from HTML).
 
 Examples of **incorrect** code for this rule:
 
@@ -81,7 +84,7 @@ if(typeof a === "string"){}
 
 ## Environments
 
-For convenience, ESLint provides shortcuts that pre-define global variables exposed by popular libraries and runtime environments. This rule supports these environments, as listed in [Specifying Environments](http://eslint.org/docs/user-guide/configuring#specifying-environments).  A few examples are given below.
+For convenience, ESLint provides shortcuts that pre-define global variables exposed by popular libraries and runtime environments. This rule supports these environments, as listed in [Specifying Environments](../user-guide/configuring).  A few examples are given below.
 
 ### browser
 
@@ -96,7 +99,7 @@ setTimeout(function() {
 });
 ```
 
-### node
+### Node.js
 
 Examples of **correct** code for this rule with `node` environment:
 
@@ -116,11 +119,7 @@ If explicit declaration of global variables is not to your taste.
 
 ## Compatibility
 
-This rule provides compatibility with treatment of global variables in [JSHint](http://www.jshint.com) and [JSLint](http://www.jslint.com).
-
-## Further Reading
-
-* ['{a}' is not defined](http://jslinterrors.com/a-is-not-defined)
+This rule provides compatibility with treatment of global variables in [JSHint](http://jshint.com/) and [JSLint](http://www.jslint.com).
 
 ## Version
 

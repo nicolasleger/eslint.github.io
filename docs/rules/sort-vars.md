@@ -1,10 +1,13 @@
 ---
-title: Rule sort-vars
+title: sort-vars - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/sort-vars.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Variable Sorting (sort-vars)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 When declaring multiple variables within the same block, some developers prefer to sort variable names alphabetically to be able to find necessary variable easier at the later time. Others feel that it adds complexity and becomes burden to maintain.
 
@@ -13,7 +16,7 @@ When declaring multiple variables within the same block, some developers prefer 
 This rule checks all variable declaration blocks and verifies that all variables are sorted alphabetically.
 The default configuration of the rule is case-sensitive.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint sort-vars: "error"*/
@@ -25,7 +28,7 @@ var a, B, c;
 var a, A;
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint sort-vars: "error"*/
@@ -58,15 +61,13 @@ var c, d, a, e;
 
 ## Options
 
-```
-"sort-vars": [<enabled>, { "ignoreCase": <boolean> }]
-```
+This rule has an object option:
 
-### `ignoreCase`
+* `"ignoreCase": true` (default `false`) ignores the case-sensitivity of the variables order
 
-When `true` the rule ignores the case-sensitivity of the variables order.
+### ignoreCase
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `{ "ignoreCase": true }` option:
 
 ```js
 /*eslint sort-vars: ["error", { "ignoreCase": true }]*/
@@ -79,6 +80,11 @@ var a, B, c;
 ## When Not To Use It
 
 This rule is a formatting preference and not following it won't negatively affect the quality of your code. If you alphabetizing variables isn't a part of your coding standards, then you can leave this rule off.
+
+## Related Rules
+
+* [sort-keys](sort-keys)
+* [sort-imports](sort-imports)
 
 ## Version
 

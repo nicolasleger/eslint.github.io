@@ -1,6 +1,7 @@
 ---
-title: Rule no-warning-comments
+title: no-warning-comments - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-warning-comments.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -87,7 +88,7 @@ Examples of **correct** code for the `{ "terms": ["todo", "fixme", "any other te
 
 ## When Not To Use It
 
-* If you have a large code base that was not developed with a policy to not use such warning terms, you might get hundreds of warnings / errors which might be contra-productive if you can't fix all of them (e.g. if you don't get the time to do it) as you might overlook other warnings / errors or get used to many of them and don't pay attention on it anymore.
+* If you have a large code base that was not developed with a policy to not use such warning terms, you might get hundreds of warnings / errors which might be counter-productive if you can't fix all of them (e.g. if you don't get the time to do it) as you might overlook other warnings / errors or get used to many of them and don't pay attention on it anymore.
 * Same reason as the point above: You shouldn't configure terms that are used very often (e.g. central parts of the native language used in your comments).
 
 ## Version

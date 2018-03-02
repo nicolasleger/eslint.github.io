@@ -1,10 +1,13 @@
 ---
-title: Rule no-class-assign
+title: no-class-assign - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-class-assign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow modifying variables of class declarations (no-class-assign)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 `ClassDeclaration` creates a variable, and we can modify the variable.
 
@@ -21,7 +24,7 @@ But the modification is a mistake in most cases.
 
 This rule is aimed to flag modifying variables of class declarations.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-class-assign: "error"*/
@@ -62,7 +65,7 @@ let A = class A {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-class-assign: "error"*/

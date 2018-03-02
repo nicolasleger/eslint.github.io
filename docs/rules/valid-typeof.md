@@ -1,16 +1,25 @@
 ---
-title: Rule valid-typeof
+title: valid-typeof - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/valid-typeof.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Ensures that the results of typeof are compared against a valid string (valid-typeof)
+# enforce comparing `typeof` expressions against valid strings (valid-typeof)
 
-For a vast majority of use-cases, the only valid results of the `typeof` operator will be one of the following: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"` and `"symbol"`. When the result of a `typeof` operation is compared against a string that is not one of these strings, it is usually a typo. This rule ensures that when the result of a `typeof` operation is compared against a string, that string is in the aforementioned set.
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+For a vast majority of use cases, the result of the `typeof` operator is one of the following string literals: `"undefined"`, `"object"`, `"boolean"`, `"number"`, `"string"`, `"function"` and `"symbol"`. It is usually a typing mistake to compare the result of a `typeof` operator to other string literals.
 
 ## Rule Details
 
-This rule aims to prevent errors from likely typos by ensuring that when the result of a `typeof` operation is compared against a string, that the string is a valid value.
+This rule enforces comparing `typeof` expressions to valid string literals.
+
+## Options
+
+This rule has an object option:
+
+* `"requireStringLiterals": true` requires `typeof` expressions to only be compared to string literals or other `typeof` expressions, and disallows comparisons to any other value.
 
 Examples of **incorrect** code for this rule:
 
@@ -20,7 +29,7 @@ Examples of **incorrect** code for this rule:
 typeof foo === "strnig"
 typeof foo == "undefimed"
 typeof bar != "nunber"
-typeof bar !== "fucntion"
+typeof bar !== "function"
 ```
 
 Examples of **correct** code for this rule:
@@ -31,6 +40,26 @@ Examples of **correct** code for this rule:
 typeof foo === "string"
 typeof bar == "undefined"
 typeof foo === baz
+typeof bar === typeof qux
+```
+
+Examples of **incorrect** code with the `{ "requireStringLiterals": true }` option:
+
+```js
+typeof foo === undefined
+typeof bar == Object
+typeof baz === "strnig"
+typeof qux === "some invalid type"
+typeof baz === anotherVariable
+typeof foo == 5
+```
+
+Examples of **correct** code with the `{ "requireStringLiterals": true }` option:
+
+```js
+typeof foo === "undefined"
+typeof bar == "object"
+typeof baz === "string"
 typeof bar === typeof qux
 ```
 

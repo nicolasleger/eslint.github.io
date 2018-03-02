@@ -1,10 +1,13 @@
 ---
-title: Rule no-octal
+title: no-octal - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-octal.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Octal Literals (no-octal)
+# disallow octal literals (no-octal)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Octal literals are numerals that begin with a leading zero, such as:
 
@@ -12,13 +15,13 @@ Octal literals are numerals that begin with a leading zero, such as:
 var num = 071;      // 57
 ```
 
-The leading zero to identify an octal literal has been a source of confusion and error in JavaScript. ECMAScript 5 deprecates the use of octal numeric literals in JavaScript and octal literals cause syntax errors in strict mode.
-
-It's therefore recommended to avoid using octal literals in JavaScript code.
+Because the leading zero which identifies an octal literal has been a source of confusion and error in JavaScript code, ECMAScript 5 deprecates the use of octal numeric literals.
 
 ## Rule Details
 
-The rule is aimed at preventing the use of a deprecated JavaScript feature, the use of octal literals. As such it will warn whenever an octal literal is found.
+The rule disallows octal literals.
+
+If ESLint parses code in strict mode, the parser (instead of this rule) reports the error.
 
 Examples of **incorrect** code for this rule:
 
@@ -40,10 +43,6 @@ var num  = "071";
 ## Compatibility
 
 * **JSHint**: W115
-
-## Further Reading
-
-* [Octal literals not allowed in strict mode](http://jslinterrors.com/octal-literals-are-not-allowed-in-strict-mode)
 
 ## Version
 

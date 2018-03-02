@@ -1,6 +1,7 @@
 ---
-title: Rule no-restricted-imports
+title: no-restricted-imports - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-restricted-imports.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -20,11 +21,60 @@ This rule allows you to specify imports that you don't want to use in your appli
 
 ## Options
 
-The syntax to specify restricted modules looks like this:
+The syntax to specify restricted imports looks like this:
 
 ```json
 "no-restricted-imports": ["error", "import1", "import2"]
 ```
+
+or like this:
+
+```json
+"no-restricted-imports": ["error", { "paths": ["import1", "import2"] }]
+```
+
+When using the object form, you can also specify an array of gitignore-style patterns:
+
+```json
+"no-restricted-imports": ["error", {
+    "paths": ["import1", "import2"],
+    "patterns": ["import1/private/*", "import2/*", "!import2/good"]
+}]
+```
+
+You may also specify a custom message for any paths you want to restrict as follows:
+
+```json
+"no-restricted-imports": ["error", [{
+  "name": "import-foo",
+  "message": "Please use import-bar instead."
+}]]
+```
+
+or like this:
+
+```json
+"no-restricted-imports": ["error", {
+  "paths": [{
+    "name": "import-foo",
+    "message": "Please use import-bar instead."
+  }]
+}]
+```
+
+or like this if you need to restrict only certain imports from a module:
+
+```json
+"no-restricted-imports": ["error", {
+  "paths": [{
+    "name": "import-foo",
+    "importNames": ["Bar"],
+    "message": "Please use Bar from /import-bar/baz/ instead."
+  }]
+}]
+```
+
+The custom message will be appended to the default error message. Please note that you may not specify custom error messages for restricted patterns as a particular import may match more than one pattern.
 
 To restrict the use of all Node.js core imports (via https://github.com/nodejs/node/tree/master/lib):
 
@@ -34,7 +84,9 @@ To restrict the use of all Node.js core imports (via https://github.com/nodejs/n
     ],
 ```
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-restricted-imports: ["error", "fs"]*/
@@ -43,17 +95,76 @@ import fs from 'fs';
 ```
 
 ```js
-/*eslint no-restricted-imports: ["error", "cluster"]*/
+/*eslint no-restricted-imports: ["error", { "paths": ["cluster"] }]*/
 
-import cluster from ' cluster ';
+import cluster from 'cluster';
 ```
 
-The following patterns are not considered problems:
+```js
+/*eslint no-restricted-imports: ["error", { "patterns": ["lodash/*"] }]*/
+
+import pick from 'lodash/pick';
+```
+
+```js
+/*eslint no-restricted-imports: ["error", { paths: [{
+    name: "foo",
+    importNames: ["default"],
+    message: "Please use the default import from '/bar/baz/' instead."
+}]}]*/
+
+import DisallowedObject from "foo";
+```
+
+```js
+/*eslint no-restricted-imports: ["error", { paths: [{
+    name: "foo",
+    importNames: ["DisallowedObject"],
+    message: "Please import 'DisallowedObject' from '/bar/baz/' instead."
+}]}]*/
+
+import { DisallowedObject as AllowedObject } from "foo";
+```
+
+```js
+/*eslint no-restricted-imports: ["error", { paths: [{
+    name: "foo",
+    importNames: ["DisallowedObject"],
+    message: "Please import 'DisallowedObject' from '/bar/baz/' instead."
+}]}]*/
+
+import * as Foo from "foo";
+```
+
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-restricted-imports: ["error", "fs"]*/
 
 import crypto from 'crypto';
+```
+
+```js
+/*eslint no-restricted-imports: ["error", { "paths": ["fs"], "patterns": ["eslint/*"] }]*/
+
+import crypto from 'crypto';
+import eslint from 'eslint';
+```
+
+```js
+/*eslint no-restricted-imports: ["error", { paths: [{ name: "foo", importNames: ["DisallowedObject"] }] }]*/
+
+import DisallowedObject from "foo"
+```
+
+```js
+/*eslint no-restricted-imports: ["error", { paths: [{
+    name: "foo",
+    importNames: ["DisallowedObject"],
+    message: "Please import 'DisallowedObject' from '/bar/baz/' instead."
+}]}]*/
+
+import { AllowedObject as DisallowedObject } from "foo";
 ```
 
 ## When Not To Use It

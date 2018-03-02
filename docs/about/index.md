@@ -1,7 +1,9 @@
 ---
 title: About
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/about/index.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # About
 
@@ -13,8 +15,8 @@ The primary reason ESLint was created was to allow developers to create their ow
 
 ESLint is written using Node.js to provide a fast runtime environment and easy installation via [npm][].
 
-[linting]: http://en.wikipedia.org/wiki/Lint_(software)
-[npm]: http://npmjs.org/
+[linting]: https://en.wikipedia.org/wiki/Lint_(software)
+[npm]: https://npmjs.org/
 
 ## Philosophy
 
@@ -28,9 +30,8 @@ Everything is pluggable:
 Every rule:
 
 * Is standalone
-* Can be able to be turned off or on (nothing can be deemed "too important to turn off")
-* Can be set to be a warning or error individually
-* Is turned on by providing a non-zero number and off by providing zero
+* Can be turned off or on (nothing can be deemed "too important to turn off")
+* Can be set to a warning or error individually
 
 Additionally:
 

@@ -1,12 +1,13 @@
 ---
-title: Rule no-space-before-semi
+title: no-space-before-semi - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-space-before-semi.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Spaces Before Semicolon (no-space-before-semi)
+# no-space-before-semi: disallow spaces before semicolons
 
-**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [semi-spacing](semi-spacing) rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [semi-spacing](semi-spacing) rule.
 
 JavaScript allows for placing unnecessary spaces between an expression and the closing semicolon.
 
@@ -22,7 +23,7 @@ var thing = function () {
 
 This rule prevents the use of spaces before a semicolon in expressions.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 var foo = "bar" ;
@@ -35,7 +36,7 @@ var foo = function() {
 var foo = 1 + 2 ;
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 ;(function(){}());

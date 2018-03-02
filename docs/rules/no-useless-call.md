@@ -1,6 +1,7 @@
 ---
-title: Rule no-useless-call
+title: no-useless-call - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-call.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

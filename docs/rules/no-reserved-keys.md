@@ -1,12 +1,13 @@
 ---
-title: Rule no-reserved-keys
+title: no-reserved-keys - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-reserved-keys.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Use of Reserved Words as Keys (no-reserved-keys)
+# no-reserved-keys: disallow unquoted reserved words as property names in object literals
 
-**Replacement notice:** This rule was removed in ESLint v1.0 and replaced by the [quote-props](quote-props) rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [quote-props](quote-props) rule.
 
 ECMAScript 3 described as series of keywords and reserved words, such as `if` and `public`, that are used or intended to be used for a core language feature. The specification also indicated that these keywords and reserved words could not be used as object property names without being enclosed in strings. An error occurs in an ECMAScript 3 environment when you use a keyword or reserved word in an object literal. For example:
 
@@ -24,7 +25,7 @@ ECMAScript 5 loosened the restriction such that keywords and reserved words can 
 
 This rule is aimed at eliminating the use of ECMAScript 3 keywords and reserved words as object literal keys. As such, it warns whenever an object key would throw an error in an ECMAScript 3 environment.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 var superman = {
@@ -37,7 +38,7 @@ var values = {
 };
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 var superman = {
@@ -56,7 +57,7 @@ If your code is only going to be executed in an ECMAScript 5 or higher environme
 
 ## Further Reading
 
-* [Reserved words as property names](http://kangax.github.io/compat-table/es5/#Reserved_words_as_property_names)
+* [Reserved words as property names](https://kangax.github.io/compat-table/es5/#Reserved_words_as_property_names)
 
 ## Version
 

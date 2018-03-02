@@ -1,17 +1,21 @@
 ---
-title: Rule no-dupe-args
+title: no-dupe-args - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-dupe-args.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# No duplicate arguments (no-dupe-args)
+# disallow duplicate arguments in `function` definitions (no-dupe-args)
 
-In strict mode you will receive a `SyntaxError` if a function takes multiple arguments with the same name.
-Outside of strict mode duplicate arguments will mask the value of the first argument.
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+If more than one parameter has the same name in a function definition, the last occurrence "shadows" the preceding occurrences. A duplicated name might be a typing error.
 
 ## Rule Details
 
-This rule prevents duplicate parameter names in a function.
+This rule disallows duplicate parameter names in function declarations or expressions. It does not apply to arrow functions or class methods, because the parser reports the error.
+
+If ESLint parses code in strict mode, the parser (instead of this rule) reports the error.
 
 Examples of **incorrect** code for this rule:
 
@@ -19,8 +23,12 @@ Examples of **incorrect** code for this rule:
 /*eslint no-dupe-args: "error"*/
 
 function foo(a, b, a) {
-    console.log("which a is it?", a);
+    console.log("value of the second a:", a);
 }
+
+var bar = function (a, b, a) {
+    console.log("value of the second a:", a);
+};
 ```
 
 Examples of **correct** code for this rule:
@@ -31,12 +39,11 @@ Examples of **correct** code for this rule:
 function foo(a, b, c) {
     console.log(a, b, c);
 }
+
+var bar = function (a, b, c) {
+    console.log(a, b, c);
+};
 ```
-
-
-## When Not To Use It
-
-If your project uses strict mode this rule may not be needed as unique param names will be automatically enforced.
 
 ## Version
 

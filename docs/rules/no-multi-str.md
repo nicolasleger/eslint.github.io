@@ -1,6 +1,7 @@
 ---
-title: Rule no-multi-str
+title: no-multi-str - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-multi-str.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -35,12 +36,6 @@ Examples of **correct** code for this rule:
 var x = "Line 1\n" +
         "Line 2";
 ```
-
-
-
-## Further Reading
-
-* [Bad escapement of EOL](http://jslinterrors.com/bad-escapement-of-eol-use-option-multistr-if-needed/)
 
 ## Version
 

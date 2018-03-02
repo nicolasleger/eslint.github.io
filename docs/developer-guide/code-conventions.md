@@ -1,11 +1,13 @@
 ---
 title: Code Conventions
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/code-conventions.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Code Conventions
 
-Programming language style guides are important for the long-term maintainability of software. This guide is based on the [Code Conventions for the Java Programming Language](http://java.sun.com/docs/codeconv/) and [Douglas Crockford's Code Conventions for the JavaScript Programming Language](http://javascript.crockford.com/code.html). Modifications have been made due to my personal experience and preferences.
+Programming language style guides are important for the long-term maintainability of software. This guide is based on the [Code Conventions for the Java Programming Language](https://java.sun.com/docs/codeconv/) and [Douglas Crockford's Code Conventions for the JavaScript Programming Language](http://javascript.crockford.com/code.html). Modifications have been made due to my personal experience and preferences.
 
 ## File Format
 
@@ -15,8 +17,6 @@ Each file has this same basic format:
 /**
  * @fileoverview Description of the file
  * @author Your Name
- * @copyright 2016 Your Name. All rights reserved.
- * See LICENSE file in root directory for full license.
  */
 
 "use strict";
@@ -43,19 +43,7 @@ module.exports = {
 };
 ```
 
-The `@author` field gives you credit for having created the file. The `@copyright` field indicates that you are the copyright holder for the file.
-
-Your submission may touch other parts of the ESLint code that you did not write. In that case, you are welcome to add a copyright notice to the top of the file if you have done any amount of significant work on the file (we leave it up to you to decide what "significant" means - if you aren't sure, just ask). You should never change the `@author` field, but you can add another `@copyright` field on top of the existing ones, such as:
-
-```js
-/**
- * @fileoverview Description of the file
- * @author Author's Name
- * @copyright 2015 Your Name. All rights reserved.
- * @copyright 2014 Author's Name. All rights reserved.
- * See LICENSE file in root directory for full license.
- */
-```
+The `@author` field gives you credit for having created the file.
 
 ## Indentation
 
@@ -281,7 +269,7 @@ Make frequent use of comments to aid others in understanding your code. Use comm
 
 ### Single-Line Comments
 
-Single-line comments should be used to documentation one line of code or a group of related lines of code. A single-line comment may be used in three ways:
+Single-line comments should be used to document one line of code or a group of related lines of code. A single-line comment may be used in three ways:
 
 1. On a separate line, describing the code beneath it.
 1. At the end of a line, describing the code before it.
@@ -662,37 +650,32 @@ Object properties follow the same naming conventions as variables. Object method
 
 ## Strict Mode
 
-Strict mode should be used only inside of functions and never globally.
+Strict mode should be used in all modules, specified below the file overview comment and above everything else:
 
-    // Bad: Global strict mode
+    // Bad: Strict mode in functions
+    function doSomething() {
+        "use strict";
+
+        // code
+    }
+
+    // Bad: Strict mode in global scope and redundant strict mode directive in function
+    "use strict";       // This one is good
+
+    function doSomething() {
+        "use strict";   // This one is bad
+
+        // code
+    }
+
+    // Good: Global strict mode
     "use strict";
 
     function doSomething() {
-        // code
-    }
-
-    // Good
-    function doSomething() {
-        "use strict";
+        // no "use strict" here
 
         // code
     }
-
-If you want strict mode to apply to multiple functions without needing to write `"use strict"` multiple times, use immediate function invocation:
-
-    // Good
-    (function() {
-        "use strict";
-
-        function doSomething() {
-            // code
-        }
-
-        function doSomethingElse() {
-            // code
-        }
-
-    }());
 
 ## Assignments
 
@@ -940,7 +923,7 @@ Blank spaces should be used in the following circumstances:
 * A keyword followed by a parenthesis should be separated by a space.
 * A blank space should appear after commas in argument lists.
 * All binary operators except dot (`.`) should be separated from their operands by spaces. Blank spaces should never separate unary operators such as unary minus, increment (`++`), and decrement (`--`) from their operands.
-* The expressions in a `for` statement should be separated by blank spaces.
+* The expressions in a `for` statement should be separated by blank spaces. Blank spaces should only be used after semicolons, not before.
 
 ## Things to Avoid
 

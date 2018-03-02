@@ -1,6 +1,7 @@
 ---
-title: Rule no-label-var
+title: no-label-var - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-label-var.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -46,10 +47,6 @@ q:
 ## When Not To Use It
 
 If you don't want to be notified about usage of labels, then it's safe to disable this rule.
-
-## Further Reading
-
-* ['{a}' is a statement label](http://jslinterrors.com/a-is-a-statement-label/)
 
 ## Related Rules
 

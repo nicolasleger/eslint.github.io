@@ -1,3 +1,11 @@
+- url: https://daofx.com
+  src: /img/logos/daofx.svg
+  name: DaoFx Inc.
+
+- url: https://sina.cn
+  src: /img/logos/sina-mobile.png
+  name: Sina News
+
 - url: http://m.sm.cn
   src: /img/logos/sm.png
   name: sm.cn
@@ -121,3 +129,59 @@
 - url: https://www.paperlesspost.com/
   src: /img/logos/paperlesspost.png
   name: Paperless Post
+
+- url: https://www.airbnb.com
+  src: /img/logos/airbnb.png
+  name: Airbnb
+
+- url: https://read.douban.com
+  src: /img/logos/ark.svg
+  name: Ark Reading
+
+- url: http://phoenixrobotix.com
+  src: /img/logos/phoenixrobotix.png
+  name: Phoenix Robotix
+
+- url: http://www.jeuxvideo.com/
+  src: /img/logos/jeuxvideo.com.svg
+  name: JeuxVideo.com
+
+- url: https://www.airhelp.com/
+  src: /img/logos/airhelp.png
+  name: AirHelp
+
+- url: https://www.squarespace.com
+  src: /img/logos/squarespace.png
+  name: Squarespace
+
+- url: https://www.microsoft.com/
+  src: /img/logos/microsoft.svg
+  name: Microsoft
+
+- url: https://www.tanda.co
+  src: /img/logos/tanda.svg
+  name: Tanda
+
+- url: https://netflix.com
+  src: /img/logos/netflix.svg
+  name: Netflix
+
+- url: https://bluecore.com
+  src: /img/logos/bluecore.svg
+  name: Bluecore
+
+- url: https://camptocamp.com
+  src: /img/logos/camptocamp.svg
+  name: Camptocamp
+
+- url: https://buddy.works
+  src: /img/logos/buddy.svg
+  name: Buddy
+
+- url: https://hasura.io
+  src: /img/logos/hasura.svg
+  name: Hasura
+
+- url: https://www.mongodb.com/
+  src: /img/logos/mongodb.svg
+  name: MongoDB

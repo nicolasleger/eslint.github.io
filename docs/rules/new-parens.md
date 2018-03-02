@@ -1,10 +1,13 @@
 ---
-title: Rule new-parens
+title: new-parens - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/new-parens.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Parens for Constructors (new-parens)
+# require parentheses when invoking a constructor with no arguments (new-parens)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 JavaScript allows the omission of parentheses when invoking a function via the `new` keyword and the constructor has no arguments. However, some coders believe that omitting the parentheses is inconsistent with the rest of the language and thus makes code less clear.
 
@@ -14,22 +17,24 @@ var person = new Person;
 
 ## Rule Details
 
-This rule is aimed at highlighting a lack of convention and increasing code clarity by requiring the use of parentheses when invoking a constructor via the `new` keyword. As such, it will warn when these parentheses are omitted.
+This rule requires parentheses when invoking a constructor with no arguments using the `new` keyword in order to increase code clarity.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint new-parens: "error"*/
 
 var person = new Person;
+var person = new (Person);
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint new-parens: "error"*/
 
 var person = new Person();
+var person = new (Person)();
 ```
 
 ## Version

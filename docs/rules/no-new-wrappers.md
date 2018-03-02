@@ -1,6 +1,7 @@
 ---
-title: Rule no-new-wrappers
+title: no-new-wrappers - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-new-wrappers.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

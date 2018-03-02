@@ -1,12 +1,13 @@
 ---
-title: Rule global-strict
+title: global-strict - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/global-strict.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Global Strict Mode (global-strict)
+# global-strict: require or disallow strict mode directives in the global scope
 
-**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [strict](strict) rule. `"global"` mode in the strict rule is most similar to this rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [strict](strict) rule. The `"global"` option in the new rule is most similar to the removed rule.
 
 Strict mode is enabled by using the following pragma in your code:
 

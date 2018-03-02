@@ -1,27 +1,20 @@
 ---
-title: Rule no-ex-assign
+title: no-ex-assign - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-ex-assign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Assignment of the Exception Parameter (no-ex-assign)
+# disallow reassigning exceptions in `catch` clauses (no-ex-assign)
 
-When an error is caught using a `catch` block, it's possible to accidentally (or purposely) overwrite the reference to the error. Such as:
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
-```js
-try {
-    // code
-} catch (e) {
-    e = 10;
-}
-```
-
-This makes it impossible to track the error from that point on.
-
+If a `catch` clause in a `try` statement accidentally (or purposely) assigns another value to the exception parameter, it impossible to refer to the error from that point on.
+Since there is no `arguments` object to offer alternative access to this data, assignment of the parameter is absolutely destructive.
 
 ## Rule Details
 
-This rule's purpose is to enforce convention. Assigning a value to the exception parameter wipes out all the valuable data contained therein and thus should be avoided. Since there is no `arguments` object to offer alternative access to this data, assignment of the parameter is absolutely destructive.
+This rule disallows reassigning exceptions in `catch` clauses.
 
 Examples of **incorrect** code for this rule:
 
@@ -43,14 +36,13 @@ Examples of **correct** code for this rule:
 try {
     // code
 } catch (e) {
-    var foo = 'bar';
+    var foo = 10;
 }
 ```
 
 ## Further Reading
 
-* [Do not assign to the exception parameter](http://jslinterrors.com/do-not-assign-to-the-exception-parameter/)
-* [The "catch" with try...catch](http://weblog.bocoup.com/the-catch-with-try-catch/) by Ben Alman explains how the exception identifier can leak into the outer scope in IE 6-8
+* [The "catch" with try...catch](https://bocoup.com/blog/the-catch-with-try-catch) by Ben Alman explains how the exception identifier can leak into the outer scope in IE 6-8
 
 ## Version
 

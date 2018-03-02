@@ -1,7 +1,9 @@
 ---
 title: User Guide
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/user-guide/README.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # User Guide
 
@@ -11,7 +13,7 @@ This guide is intended for those who wish to use ESLint as an end-user. If you'r
 
 Want to skip ahead and just start using ESLint? This section gives a high-level overview of installation, setup, and configuration options.
 
-## [Rules](rules)
+## [Rules](../rules)
 
 ESLint has a lot of rules that you can configure to fine-tune it to your project. This section is an exhaustive list of every rule and link to each rule's documentation.
 
@@ -27,6 +29,15 @@ There are a lot of command line flags for ESLint and this section explains what 
 
 Wondering if ESLint will work with your favorite editor or build system? This section has a list of all known integrations (submitted by their authors).
 
-## [Migrating to 1.0.0](migrating-to-1.0.0)
+## [Rule Deprecation](rule-deprecation)
 
-If you were using a version of ESLint prior to v1.0.0, this section helps you with the transition.
+The ESLint team is committed to making upgrading as easy and painless as possible. This section outlines the guidelines the team has set in place for the deprecation of rules in future releases.
+
+## Migrating
+
+If you were using a prior version of ESLint, you can get help with the transition by reading:
+
+- [migrating-to-1.0.0](migrating-to-1.0.0)
+- [migrating-to-2.0.0](migrating-to-2.0.0)
+- [migrating-to-3.0.0](migrating-to-3.0.0)
+- [migrating-to-4.0.0](migrating-to-4.0.0)

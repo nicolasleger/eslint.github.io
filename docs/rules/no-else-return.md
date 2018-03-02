@@ -1,10 +1,13 @@
 ---
-title: Rule no-else-return
+title: no-else-return - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-else-return.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow return before else (no-else-return)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 If an `if` block contains a `return` statement, the `else` block becomes unnecessary. Its contents can be placed outside of the block.
 
@@ -21,6 +24,23 @@ function foo() {
 ## Rule Details
 
 This rule is aimed at highlighting an unnecessary block of code following an `if` containing a return statement. As such, it will warn when it encounters an `else` following a chain of `if`s, all of them containing a `return` statement.
+
+## Options
+
+This rule has an object option:
+
+```json
+{
+    "no-else-return": ["error", { "allowElseIf": true }],
+    // or
+    "no-else-return": ["error", { "allowElseIf": false }]
+}
+```
+
+* `allowElseIf: true` (default) allows `else if` blocks after a return
+* `allowElseIf: false` disallows `else if` blocks after a return
+
+### `allowElseIf: true`
 
 Examples of **incorrect** code for this rule:
 
@@ -53,6 +73,16 @@ function foo() {
     }
 
     return t;
+}
+
+function foo() {
+    if (error) {
+        return 'It failed';
+    } else {
+        if (loading) {
+            return "It's still loading";
+        }
+    }
 }
 
 // Two warnings for nested occurrences
@@ -99,6 +129,46 @@ function foo() {
         }
     } else {
         return z;
+    }
+}
+
+function foo() {
+    if (error) {
+        return 'It failed';
+    } else if (loading) {
+        return "It's still loading";
+    }
+}
+```
+
+### `allowElseIf: false`
+
+Examples of **incorrect** code for this rule:
+
+```js
+/*eslint no-else-return: ["error", {allowElseIf: false}]*/
+
+function foo() {
+    if (error) {
+        return 'It failed';
+    } else if (loading) {
+        return "It's still loading";
+    }
+}
+```
+
+Examples of **correct** code for this rule:
+
+```js
+/*eslint no-else-return: ["error", {allowElseIf: false}]*/
+
+function foo() {
+    if (error) {
+        return 'It failed';
+    }
+
+    if (loading) {
+        return "It's still loading";
     }
 }
 ```

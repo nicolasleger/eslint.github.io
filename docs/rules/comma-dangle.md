@@ -1,10 +1,13 @@
 ---
-title: Rule comma-dangle
+title: comma-dangle - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/comma-dangle.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow or Enforce Dangling Commas (comma-dangle)
+# require or disallow trailing commas (comma-dangle)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Trailing commas in object literals are valid according to the ECMAScript 5 (and ECMAScript 3!) spec. However, IE8 (when not in IE8 document mode) and below will throw an error when it encounters trailing commas in JavaScript.
 
@@ -15,7 +18,27 @@ var foo = {
 };
 ```
 
-On the other hand, trailing commas simplify adding and removing items to objects and arrays, since only the lines you are modifying must be touched.
+Trailing commas simplify adding and removing items to objects and arrays, since only the lines you are modifying must be touched.
+Another argument in favor of trailing commas is that it improves the clarity of diffs when an item is added or removed from an object or array:
+
+Less clear:
+
+```diff
+ var foo = {
+-    bar: "baz",
+-    qux: "quux"
++    bar: "baz"
+ };
+```
+
+More clear:
+
+```diff
+ var foo = {
+     bar: "baz",
+-    qux: "quux",
+ };
+```
 
 ## Rule Details
 
@@ -23,16 +46,44 @@ This rule enforces consistent use of trailing commas in object and array literal
 
 ## Options
 
-This rule takes one argument, which can be one of the following options:
+This rule has a string option or an object option:
 
-- `"never"` - warn whenever a trailing comma is detected. The default value of this option is `"never"`.
-- `"always"` - warn whenever a missing comma is detected.
-- `"always-multiline"` - warn if there is a missing trailing comma on arrays or objects that span multiple lines, and warns if there is a trailing comma present on single line arrays or objects.
-- `"only-multiline"` - warn whenever a trailing comma is detected on single line nodes.
+```json
+{
+    "comma-dangle": ["error", "never"],
+    // or
+    "comma-dangle": ["error", {
+        "arrays": "never",
+        "objects": "never",
+        "imports": "never",
+        "exports": "never",
+        "functions": "ignore"
+    }]
+}
+```
+
+* `"never"` (default) disallows trailing commas
+* `"always"` requires trailing commas
+* `"always-multiline"` requires trailing commas when the last element or property is in a *different* line than the closing `]` or `}` and disallows trailing commas when the last element or property is on the *same* line as the closing `]` or `}`
+* `"only-multiline"` allows (but does not require) trailing commas when the last element or property is in a *different* line than the closing `]` or `}` and disallows trailing commas when the last element or property is on the *same* line as the closing `]` or `}`
+
+Trailing commas in function declarations and function calls are valid syntax since ECMAScript 2017; however, the string option does not check these situations for backwards compatibility.
+
+You can also use an object option to configure this rule for each type of syntax.
+Each of the following options can be set to `"never"`, `"always"`, `"always-multiline"`, `"only-multiline"`, or `"ignore"`.
+The default for each option is `"never"` unless otherwise specified.
+
+* `arrays` is for array literals and array patterns of destructuring. (e.g. `let [a,] = [1,];`)
+* `objects` is for object literals and object patterns of destructuring. (e.g. `let {a,} = {a: 1};`)
+* `imports` is for import declarations of ES Modules. (e.g. `import {a,} from "foo";`)
+* `exports` is for export declarations of ES Modules. (e.g. `export {a,};`)
+* `functions` is for function declarations and function calls. (e.g. `(function(a,){ })(b,);`)
+    * `functions` is set to `"ignore"` by default for consistency with the string option.
+    * `functions` should only be enabled when linting ECMAScript 2017 or higher.
 
 ### never
 
-Examples of **incorrect** code for the default `"never"` option:
+Examples of **incorrect** code for this rule with the default `"never"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "never"]*/
@@ -50,7 +101,7 @@ foo({
 });
 ```
 
-Examples of **correct** code for the default `"never"` option:
+Examples of **correct** code for this rule with the default `"never"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "never"]*/
@@ -70,7 +121,7 @@ foo({
 
 ### always
 
-Examples of **incorrect** code for the `"always"` option:
+Examples of **incorrect** code for this rule with the `"always"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "always"]*/
@@ -88,7 +139,7 @@ foo({
 });
 ```
 
-Examples of **correct** code for the `"always"` option:
+Examples of **correct** code for this rule with the `"always"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "always"]*/
@@ -108,7 +159,7 @@ foo({
 
 ### always-multiline
 
-Examples of **incorrect** code for the `"always-multiline"` option:
+Examples of **incorrect** code for this rule with the `"always-multiline"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "always-multiline"]*/
@@ -136,7 +187,7 @@ foo({
 });
 ```
 
-Examples of **correct** code for the `"always-multiline"` option:
+Examples of **correct** code for this rule with the `"always-multiline"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "always-multiline"]*/
@@ -165,7 +216,7 @@ foo({
 
 ### only-multiline
 
-Examples of **incorrect** code for the `"only-multiline"` option:
+Examples of **incorrect** code for this rule with the `"only-multiline"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "only-multiline"]*/
@@ -179,7 +230,7 @@ var arr = [1,
 
 ```
 
-Examples of **correct** code for the `"only-multiline"` option:
+Examples of **correct** code for this rule with the `"only-multiline"` option:
 
 ```js
 /*eslint comma-dangle: ["error", "only-multiline"]*/
@@ -219,6 +270,56 @@ foo({
   bar: "baz",
   qux: "quux"
 });
+```
+
+### functions
+
+Examples of **incorrect** code for this rule with the `{"functions": "never"}` option:
+
+```js
+/*eslint comma-dangle: ["error", {"functions": "never"}]*/
+
+function foo(a, b,) {
+}
+
+foo(a, b,);
+new foo(a, b,);
+```
+
+Examples of **correct** code for this rule with the `{"functions": "never"}` option:
+
+```js
+/*eslint comma-dangle: ["error", {"functions": "never"}]*/
+
+function foo(a, b) {
+}
+
+foo(a, b);
+new foo(a, b);
+```
+
+Examples of **incorrect** code for this rule with the `{"functions": "always"}` option:
+
+```js
+/*eslint comma-dangle: ["error", {"functions": "always"}]*/
+
+function foo(a, b) {
+}
+
+foo(a, b);
+new foo(a, b);
+```
+
+Examples of **correct** code for this rule with the `{"functions": "always"}` option:
+
+```js
+/*eslint comma-dangle: ["error", {"functions": "always"}]*/
+
+function foo(a, b,) {
+}
+
+foo(a, b,);
+new foo(a, b,);
 ```
 
 ## When Not To Use It

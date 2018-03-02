@@ -1,50 +1,62 @@
 ---
 title: Managing Releases
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/maintainer-guide/releases.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Managing Releases
 
 Releases are when a project formally publishes a new version so the community can use it. There are two types of releases:
 
-* Regular releases that follow [semantic versioning](http://semver.org/) and are considered production-ready.
+* Regular releases that follow [semantic versioning](https://semver.org/) and are considered production-ready.
 * Prereleases that are not considered production-ready and are intended to give the community a preview of upcoming changes.
 
-## Setting up a Release Environment
+## Release Team
 
-In order to run a release, be sure that:
+A two-person release team is assigned to each scheduled release. This two-person team is responsible for:
 
-1. You have [eslint.github.io](https://github.com/eslint/eslint.github.io) checked out into the same directory as the project (such as ESLint itself). Some projects automatically update the website.
-1. You are logged in to npm. If not, [log in](https://docs.npmjs.com/cli/adduser).
+1. The scheduled release on Friday
+1. Monitoring issues over the weekend
+1. Determining if a patch release is necessary on Monday
+1. Publishing the patch release (if necessary)
 
-## Building a New Release
+The two-person team should seek input from the whole team on the Monday following a release to double-check if a patch release is necessary.
 
-There are two types of releases: regular and prerelease.
+## Release Communication
 
-### Regular Releases
+Each scheduled release should be associated with a release issue ([example](https://github.com/eslint/eslint/issues/8138)). The release issue is the source of information for the team about the status of a release. Be sure the release issue has the "release" label so that it's easy to find.
 
-You can run a regular release with the following command:
+## Process
 
-```
-$ npm run release
-```
+On the day of a scheduled release, the release team should follow these steps:
 
-The [release tool](https://github.com/eslint/eslint-release) will inspect the commit history and determine the correct next version. It will also handle publishing to both GitHub and npm with the correct names and tags.
+1. Review open pull requests to see if any should be merged. In general, you can merge pull requests that:
+    * Have been open at least two days and have been reviewed (these are just waiting for merge).
+    * Important pull requests (as determined by the team). You should stop and have people review before merging if they haven't been already.
+    * Documentation changes.
+    * Small bug fixes written by a team member.
+1. Log into Jenkins and schedule a build for the "ESLint Release" job.
+1. Wait for the "ESLint Release" job to complete.
+1. Update the release blog post with a "Highlights" section, including new rules and anything else that's important.
+1. Make a release announcement in the public chatroom.
+1. Make a release announcement on Twitter.
+1. Make a release announcement on the release issue. Document any problems that occurred during the release, and remind the team not to merge anything other than documentation changes and bug fixes. Leave the release issue open.
+1. Add the `patch release pending` label to the release issue. (When this label is present, `eslint-github-bot` will create a pending status check on non-semver-patch pull requests, to ensure that they aren't accidentally merged while a patch release is pending.)
 
-### Prereleases
+On the Monday following the scheduled release, the release team needs to determine if a patch release is necessary. A patch release is considered necessary if any of the following occurred since the scheduled release:
 
-You can create a prerelease version, either an alpha or a beta, by running the appropriate command:
+* A regression bug is causing people's lint builds to fail when it previously passed.
+* Any bug that is causing a lot of problems for users (frequently happens due to new functionality).
 
-```
-$ npm run alpharelease
-$ npm run betarelease
-```
+The patch release decision should be made as early on Monday as possible. If a patch release is necessary, then follow the same steps as the scheduled release process.
 
-As with regular releases, the release tool will handle the common parts of the release process. The biggest differences are that it will use the version you specify instead of calculating one and it will push to npm using the `next` tag instead of `latest`.
+In rare cases, a second patch release might be necessary if the release is known to have a severe regression that hasn't been fixed by Monday. If this occurs, the release team should announce the situation on the release issue, and leave the issue open until all patch releases are complete. However, it's usually better to fix bugs for the next release cycle rather than doing a second patch release.
 
-### After Running the Release Command
+After the patch release has been published (or no patch release is necessary), close the release issue and inform the team that they can start merging in semver-minor changes again.
 
-There are some steps to complete after running the release command:
+## Emergency Releases
 
-1. Update the release details on GitHub (https://github.com/eslint/eslint/releases)
-1. For releases that aren't patches, update the release blog post to highlight important changes in the release.
+In general, we try not to do emergency releases (an emergency release is unplanned and isn't the regularly scheduled release or the anticipated patch release). Even if there is a regression, it's best to wait the weekend to see if any other problems arise so a patch release can fix as many issues as possible.
+
+The only real exception is if ESLint is completely unusable by most of the current users. For instance, we once pushed a release that errored for everyone because it was missing some core files. In that case, an emergency release is appropriate.

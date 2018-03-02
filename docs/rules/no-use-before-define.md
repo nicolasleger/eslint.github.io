@@ -1,6 +1,7 @@
 ---
-title: Rule no-use-before-define
+title: no-use-before-define - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-use-before-define.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -31,7 +32,6 @@ function g() {
 }
 var b = 1;
 
-// With blockBindings: true
 {
     alert(c);
     let c = 1;
@@ -56,9 +56,8 @@ function g() {
     return b;
 }
 
-// With blockBindings: true
 {
-    let C;
+    let c;
     c++;
 }
 ```
@@ -83,8 +82,13 @@ function g() {
   Otherwise, ignores those references if the declaration is in upper function scopes.
   Class declarations are not hoisted, so it might be danger.
   Default is `true`.
+* `variables` (`boolean`) -
+  This flag determines whether or not the rule checks variable declarations in upper scopes.
+  If this is `true`, the rule warns every reference to a variable before the variable declaration.
+  Otherwise, the rule ignores a reference if the declaration is in an upper scope, while still reporting the reference if it's in the same scope as the declaration.
+  Default is `true`.
 
-This rule accepts `"nofunc"` string as a option.
+This rule accepts `"nofunc"` string as an option.
 `"nofunc"` is the same as `{ "functions": false, "classes": true }`.
 
 ### functions
@@ -123,6 +127,29 @@ function foo() {
 
 class A {
 }
+```
+
+### variables
+
+Examples of **incorrect** code for the `{ "variables": false }` option:
+
+```js
+/*eslint no-use-before-define: ["error", { "variables": false }]*/
+
+console.log(foo);
+var foo = 1;
+```
+
+Examples of **correct** code for the `{ "variables": false }` option:
+
+```js
+/*eslint no-use-before-define: ["error", { "variables": false }]*/
+
+function baz() {
+    console.log(foo);
+}
+
+var foo = 1;
 ```
 
 ## Version

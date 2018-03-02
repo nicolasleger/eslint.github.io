@@ -1,10 +1,12 @@
 name: "ESLint - Pluggable JavaScript linter"
+repository: "eslint/eslint.github.io"
 exclude: [
   'node_modules',
+  'bower_components',
   'vendor'
 ]
 description: "A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript. Maintain your code quality with ease."
-url: http://eslint.org
+url: https://eslint.org
 permalink: /blog/:year/:month/:title
 gems:
     - jekyll-sitemap
@@ -12,6 +14,7 @@ gems:
     - algoliasearch-jekyll
 kramdown:
   input: GFM
+  toc_levels: 2..3
 algolia:
   application_id: 'XWXG7MEBSB'
   index_name:     'eslint'

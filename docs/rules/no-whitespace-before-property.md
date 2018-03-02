@@ -1,10 +1,13 @@
 ---
-title: Rule no-whitespace-before-property
+title: no-whitespace-before-property - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-whitespace-before-property.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow whitespace before properties (no-whitespace-before-property)
+# disallow whitespace before properties (no-whitespace-before-property)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 JavaScript allows whitespace between objects and their properties. However, inconsistent spacing can make code harder to read and can lead to errors.
 
@@ -14,7 +17,7 @@ foo. bar .baz . quz
 
 ## Rule Details
 
-This rule alerts for whitespace around the dot or before the opening bracket before properties of objects if they are on the same line. It does not alert for whitespace when the object and property are on separate lines, as it is common to add newlines to longer chains of properties:
+This rule disallows whitespace around the dot or before the opening bracket before properties of objects if they are on the same line. This rule allows whitespace when the object and property are on separate lines, as it is common to add newlines to longer chains of properties:
 
 ```js
 foo
@@ -23,7 +26,7 @@ foo
   .qux()
 ```
 
-The following patterns are considered problems when this rule is turned on:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-whitespace-before-property: "error"*/
@@ -43,7 +46,7 @@ foo
   .bar(). baz()
 ```
 
-And the following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-whitespace-before-property: "error"*/

@@ -1,6 +1,7 @@
 ---
-title: Rule no-process-exit
+title: no-process-exit - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-process-exit.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 

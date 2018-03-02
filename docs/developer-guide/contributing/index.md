@@ -1,7 +1,9 @@
 ---
 title: Contributing
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/contributing/README.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Contributing
 
@@ -9,9 +11,13 @@ One of the great things about open source projects is that anyone can contribute
 
 This guide is intended for anyone who wants to contribute to an ESLint project. Please read it carefully as it answers a lot of the questions many newcomers have when first working with our projects.
 
-## [Signing the CLA](/cla)
+## Read the [Code of Conduct](https://js.foundation/community/code-of-conduct)
 
-In order to submit code or documentation to an ESLint project, please electronically sign the [Contributor License Agreement](http://eslint.org/cla). The CLA is you giving us permission to use your contribution.
+ESLint welcomes contributions from everyone and adheres to the [JS Foundation Code of Conduct](https://js.foundation/community/code-of-conduct). We kindly request that you read over our code of conduct before contributing.
+
+## [Signing the CLA](https://js.foundation/CLA)
+
+In order to submit code or documentation to an ESLint project, you will need to electronically sign our [Contributor License Agreement](https://cla.js.foundation/eslint/eslint). The CLA is you giving us permission to use your contribution.
 
 ## [Bug Reporting](reporting-bugs)
 

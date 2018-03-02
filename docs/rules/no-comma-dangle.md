@@ -1,12 +1,13 @@
 ---
-title: Rule no-comma-dangle
+title: no-comma-dangle - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-comma-dangle.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Dangling Commas (no-comma-dangle)
+# no-comma-dangle: disallow trailing commas in object and array literals
 
-**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [comma-dangle](comma-dangle) rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [comma-dangle](comma-dangle) rule.
 
 Trailing commas in object literals are valid according to the ECMAScript 5 (and ECMAScript 3!) spec, however IE8 (when not in IE8 document mode) and below will throw an error when it encounters trailing commas in JavaScript.
 
@@ -21,7 +22,7 @@ var foo = {
 
 This rule is aimed at detecting trailing commas in object literals. As such, it will warn whenever it encounters a trailing comma in an object literal.
 
-The following are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 var foo = {
@@ -37,7 +38,7 @@ foo({
 });
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 var foo = {

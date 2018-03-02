@@ -1,10 +1,13 @@
 ---
-title: Rule no-sparse-arrays
+title: no-sparse-arrays - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-sparse-arrays.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Sparse Arrays (no-sparse-arrays)
+# disallow sparse arrays (no-sparse-arrays)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Sparse arrays contain empty slots, most frequently due to multiple commas being used in an array literal, such as:
 
@@ -24,7 +27,7 @@ The confusion around sparse arrays defined in this manner is enough that it's re
 
 ## Rule Details
 
-This rule aims to eliminate sparse arrays that are defined by extra commas.
+This rule disallows sparse array literals which have "holes" where commas are not preceded by elements. It does not apply to a trailing comma following the last element.
 
 Examples of **incorrect** code for this rule:
 
@@ -43,7 +46,7 @@ Examples of **correct** code for this rule:
 var items = [];
 var items = new Array(23);
 
-// trailing comma is okay
+// trailing comma (after the last element) is not a problem
 var colors = [ "red", "blue", ];
 ```
 
@@ -53,7 +56,7 @@ If you want to use sparse arrays, then it is safe to disable this rule.
 
 ## Further Reading
 
-* [Inconsistent array literals](http://www.nczonline.net/blog/2007/09/09/inconsistent-array-literals/)
+* [Inconsistent array literals](https://www.nczonline.net/blog/2007/09/09/inconsistent-array-literals/)
 
 ## Version
 

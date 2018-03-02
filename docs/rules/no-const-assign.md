@@ -1,10 +1,13 @@
 ---
-title: Rule no-const-assign
+title: no-const-assign - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-const-assign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow modifying variables that are declared using `const` (no-const-assign)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 We cannot modify variables that are declared using `const` keyword.
 It will raise a runtime error.
@@ -15,7 +18,7 @@ Under non ES2015 environment, it might be ignored merely.
 
 This rule is aimed to flag modifying variables that are declared using `const` keyword.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-const-assign: "error"*/
@@ -41,7 +44,7 @@ const a = 0;
 ++a;
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-const-assign: "error"*/

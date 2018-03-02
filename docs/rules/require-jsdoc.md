@@ -1,10 +1,11 @@
 ---
-title: Rule require-jsdoc
+title: require-jsdoc - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/require-jsdoc.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require JSDoc comment (require-jsdoc)
+# require JSDoc comments (require-jsdoc)
 
 [JSDoc](http://usejsdoc.org) is a JavaScript API documentation generator. It uses specially-formatted comments inside of code to generate API documentation automatically. For example, this is what a JSDoc comment looks like for a function:
 
@@ -24,21 +25,21 @@ Some style guides require JSDoc comments for all functions as a way of explainin
 
 ## Rule Details
 
-This rule generates warnings for nodes that do not have JSDoc comments when they should. Supported nodes:
+This rule requires JSDoc comments for specified nodes. Supported nodes:
 
-* `FunctionDeclaration`
-* `ClassDeclaration`
-* `MethodDefinition`
+* `"FunctionDeclaration"`
+* `"ClassDeclaration"`
+* `"MethodDefinition"`
+* `"ArrowFunctionExpression"`
+* `"FunctionExpression"`
 
 ## Options
 
-This rule accepts a `require` object with its properties as
+This rule has a single object option:
 
-* `FunctionDeclaration` (default: `true`)
-* `ClassDeclaration` (default: `false`)
-* `MethodDefinition` (default: `false`)
+* `"require"` requires JSDoc comments for the specified nodes
 
-Default option settings are
+Default option settings are:
 
 ```json
 {
@@ -46,20 +47,26 @@ Default option settings are
         "require": {
             "FunctionDeclaration": true,
             "MethodDefinition": false,
-            "ClassDeclaration": false
+            "ClassDeclaration": false,
+            "ArrowFunctionExpression": false,
+            "FunctionExpression": false
         }
     }]
 }
 ```
 
-The following patterns are considered problems:
+### require
+
+Examples of **incorrect** code for this rule with the `{ "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true, "ArrowFunctionExpression": true, "FunctionExpression": true } }` option:
 
 ```js
 /*eslint "require-jsdoc": ["error", {
     "require": {
         "FunctionDeclaration": true,
         "MethodDefinition": true,
-        "ClassDeclaration": true
+        "ClassDeclaration": true,
+        "ArrowFunctionExpression": true,
+        "FunctionExpression": true
     }
 }]*/
 
@@ -67,32 +74,70 @@ function foo() {
     return 10;
 }
 
-class Test{
-    getDate(){}
+var foo = () => {
+    return 10;
+};
+
+class Foo {
+    bar() {
+        return 10;
+    }
 }
+
+var foo = function() {
+    return 10;
+};
+
+var foo = {
+    bar: function() {
+        return 10;
+    },
+
+    baz() {
+        return 10;
+    }
+};
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `{ "require": { "FunctionDeclaration": true, "MethodDefinition": true, "ClassDeclaration": true, "ArrowFunctionExpression": true, "FunctionExpression": true } }` option:
 
 ```js
 /*eslint "require-jsdoc": ["error", {
     "require": {
         "FunctionDeclaration": true,
         "MethodDefinition": true,
-        "ClassDeclaration": true
+        "ClassDeclaration": true,
+        "ArrowFunctionExpression": true,
+        "FunctionExpression": true
     }
 }]*/
 
 /**
-* It returns 10
-*/
+ * It returns 10
+ */
 function foo() {
     return 10;
 }
 
 /**
-* It returns 10
-*/
+ * It returns test + 10
+ * @params {int} test - some number
+ * @returns {int} sum of test and 10
+ */
+var foo = (test) => {
+    return test + 10;
+}
+
+/**
+ * It returns 10
+ */
+var foo = () => {
+    return 10;
+}
+
+/**
+ * It returns 10
+ */
 var foo = function() {
     return 10;
 }
@@ -103,14 +148,41 @@ array.filter(function(item) {
 });
 
 /**
-* It returns 10
-*/
-class Test{
+ * A class that can return the number 10
+ */
+class Foo {
     /**
-    * returns the date
+    * It returns 10
     */
-    getDate(){}
+    bar() {
+        return 10;
+    }
 }
+
+/**
+ * It returns 10
+ */
+var foo = function() {
+    return 10;
+};
+
+var foo = {
+    /**
+    * It returns 10
+    */
+    bar: function() {
+        return 10;
+    },
+
+    /**
+    * It returns 10
+    */
+    baz() {
+        return 10;
+    }
+};
+
+setTimeout(() => {}, 10); // since it's an anonymous arrow function
 ```
 
 ## When Not To Use It

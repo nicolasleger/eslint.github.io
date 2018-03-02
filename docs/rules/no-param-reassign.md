@@ -1,6 +1,7 @@
 ---
-title: Rule no-param-reassign
+title: no-param-reassign - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-param-reassign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -40,7 +41,7 @@ function foo(bar) {
 
 ## Options
 
-This rule takes one option, an object, with a property `"props"`. It is `false` by default. If it is `true` is set, this rule warns modifying of properties of parameters.
+This rule takes one option, an object, with a boolean property `"props"` and an array `"ignorePropertyModificationsFor"`. `"props"` is `false` by default. If `"props"` is set to `true`, this rule warns against the modification of parameter properties unless they're included in `"ignorePropertyModificationsFor"`, which is an empty array by default.
 
 ### props
 
@@ -80,13 +81,32 @@ function foo(bar) {
 }
 ```
 
+Examples of **correct** code for the `{ "props": true }` option with `"ignorePropertyModificationsFor"` set:
+
+```js
+/*eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["bar"] }]*/
+
+function foo(bar) {
+    bar.prop = "value";
+}
+
+function foo(bar) {
+    delete bar.aaa;
+}
+
+function foo(bar) {
+    bar.aaa++;
+}
+```
+
+
 ## When Not To Use It
 
 If you want to allow assignment to function parameters, then you can safely disable this rule.
 
 ## Further Reading
 
-* [JavaScript: Don’t Reassign Your Function Arguments](http://spin.atomicobject.com/2011/04/10/javascript-don-t-reassign-your-function-arguments/)
+* [JavaScript: Don’t Reassign Your Function Arguments](https://spin.atomicobject.com/2011/04/10/javascript-don-t-reassign-your-function-arguments/)
 
 ## Version
 

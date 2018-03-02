@@ -1,6 +1,7 @@
 ---
-title: Rule no-magic-numbers
+title: no-magic-numbers - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-magic-numbers.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -36,6 +37,14 @@ var data = ['foo', 'bar', 'baz'];
 var dataLast = data[2];
 ```
 
+```js
+/*eslint no-magic-numbers: "error"*/
+
+var SECONDS;
+
+SECONDS = 60;
+```
+
 Examples of **correct** code for this rule:
 
 ```js
@@ -54,7 +63,7 @@ var dutyFreePrice = 100,
 An array of numbers to ignore. It's set to `[]` by default.
 If provided, it must be an `Array`.
 
-Examples of **correct** code for the sample { "ignore": [1] } option:
+Examples of **correct** code for the sample `{ "ignore": [1] }` option:
 
 ```js
 /*eslint no-magic-numbers: ["error", { "ignore": [1] }]*/
@@ -67,7 +76,7 @@ var dataLast = data.length && data[data.length - 1];
 
 A boolean to specify if numbers used as array indexes are considered okay. `false` by default.
 
-Examples of **correct** code for the { "ignoreArrayIndexes": true } option:
+Examples of **correct** code for the `{ "ignoreArrayIndexes": true }` option:
 
 ```js
 /*eslint no-magic-numbers: ["error", { "ignoreArrayIndexes": true }]*/
@@ -80,7 +89,7 @@ var dataLast = data[2];
 
 A boolean to specify if we should check for the const keyword in variable declaration of numbers. `false` by default.
 
-Examples of **incorrect** code for the { "enforceConst": true } option:
+Examples of **incorrect** code for the `{ "enforceConst": true }` option:
 
 ```js
 /*eslint no-magic-numbers: ["error", { "enforceConst": true }]*/
@@ -95,7 +104,7 @@ var dutyFreePrice = 100,
 
 A boolean to specify if we should detect numbers when setting object properties for example. `false` by default.
 
-Examples of **incorrect** code for the { "detectObjects": true } option:
+Examples of **incorrect** code for the `{ "detectObjects": true }` option:
 
 ```js
 /*eslint no-magic-numbers: ["error", { "detectObjects": true }]*/
@@ -108,7 +117,7 @@ var dutyFreePrice = 100,
     finalPrice = dutyFreePrice + (dutyFreePrice * magic.tax);
 ```
 
-Examples of **correct** code for the { "detectObjects": true } option:
+Examples of **correct** code for the `{ "detectObjects": true }` option:
 
 ```js
 /*eslint no-magic-numbers: ["error", { "detectObjects": true }]*/

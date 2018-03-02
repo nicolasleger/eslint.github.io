@@ -1,16 +1,26 @@
 ---
-title: Rule use-isnan
+title: use-isnan - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/use-isnan.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require isNaN() (use-isnan)
+# require calls to `isNaN()` when checking for `NaN` (use-isnan)
 
-In JavaScript, `NaN` is a special value of the `Number` type. It's used to represent any of the "not-a-number" values represented by the double-precision 64-bit format as specified by the IEEE Standard for Binary Floating-Point Arithmetic. `NaN` has the unique property of not being equal to anything, including itself. That is to say, that the condition `NaN !== NaN` evaluates to true.
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+In JavaScript, `NaN` is a special value of the `Number` type. It's used to represent any of the "not-a-number" values represented by the double-precision 64-bit format as specified by the IEEE Standard for Binary Floating-Point Arithmetic.
+
+Because `NaN` is unique in JavaScript by not being equal to anything, including itself, the results of comparisons to `NaN` are confusing:
+
+* `NaN === NaN` or `NaN == NaN` evaluate to false
+* `NaN !== NaN` or `NaN != NaN` evaluate to true
+
+Therefore, use `Number.isNaN()` or global `isNaN()` functions to test whether a value is `NaN`.
 
 ## Rule Details
 
-This rule is aimed at eliminating potential errors as the result of comparing against the special value `NaN`.
+This rule disallows comparisons to 'NaN'.
 
 Examples of **incorrect** code for this rule:
 
@@ -35,14 +45,10 @@ if (isNaN(foo)) {
     // ...
 }
 
-if (isNaN(NaN)) {
+if (!isNaN(foo)) {
     // ...
 }
 ```
-
-## Further Reading
-
-* [Use the isNaN function to compare with NaN](http://jslinterrors.com/use-the-isnan-function-to-compare-with-nan/)
 
 ## Version
 

@@ -1,10 +1,13 @@
 ---
-title: Rule no-confusing-arrow
+title: no-confusing-arrow - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-confusing-arrow.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow arrow functions where they could be confused with comparisons (no-confusing-arrow)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Arrow functions (`=>`) are similar in syntax to some comparison operators (`>`, `<`, `<=`, and `>=`). This rule warns against using the arrow function syntax in places where it could be confused with a comparison operator. Even if the arguments of the arrow function are wrapped with parens, this rule still warns about it unless `allowParens` is set to `true`.
 
@@ -21,7 +24,7 @@ var x = a <= 1 ? 2 : 3;
 
 ## Rule Details
 
-The following patterns are considered warnings:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-confusing-arrow: "error"*/
@@ -32,7 +35,7 @@ var x = (a) => 1 ? 2 : 3;
 var x = (a) => (1 ? 2 : 3);
 ```
 
-The following patterns are not considered warnings:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-confusing-arrow: "error"*/
@@ -59,10 +62,10 @@ This rule accepts a single options argument with the following defaults:
 1. `true` relaxes the rule and accepts parenthesis as a valid "confusion-preventing" syntax.
 2. `false` warns even if the expression is wrapped in parenthesis
 
-When `allowParens` is set to `true` following patterns are no longer considered as warnings:
+Examples of **correct** code for this rule with the `{"allowParens": true}` option:
 
 ```js
-/*eslint no-confusing-arrow: ["error", {allowParens: true}]*/
+/*eslint no-confusing-arrow: ["error", {"allowParens": true}]*/
 /*eslint-env es6*/
 var x = a => (1 ? 2 : 3);
 var x = (a) => (1 ? 2 : 3);

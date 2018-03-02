@@ -1,10 +1,13 @@
 ---
-title: Rule prefer-const
+title: prefer-const - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-const.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Suggest using `const` (prefer-const)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 If a variable is never reassigned, using the `const` declaration is better.
 
@@ -94,7 +97,10 @@ console.log(b);
 
 ```json
 {
-    "prefer-const": ["error", {"destructuring": "any"}]
+    "prefer-const": ["error", {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+    }]
 }
 ```
 
@@ -154,6 +160,41 @@ let {a, b} = obj;
 a = a + 1;
 ```
 
+### ignoreReadBeforeAssign
+
+This is an option to avoid conflicting with `no-use-before-define` rule (without `"nofunc"` option).
+If `true` is specified, this rule will ignore variables that are read between the declaration and the first assignment.
+Default is `false`.
+
+Examples of **correct** code for the `{"ignoreReadBeforeAssign": true}` option:
+
+```js
+/*eslint prefer-const: ["error", {"ignoreReadBeforeAssign": true}]*/
+/*eslint-env es6*/
+
+let timer;
+function initialize() {
+    if (foo()) {
+        clearInterval(timer);
+    }
+}
+timer = setInterval(initialize, 100);
+```
+
+Examples of **correct** code for the default `{"ignoreReadBeforeAssign": false}` option:
+
+```js
+/*eslint prefer-const: ["error", {"ignoreReadBeforeAssign": false}]*/
+/*eslint-env es6*/
+
+const timer = setInterval(initialize, 100);
+function initialize() {
+    if (foo()) {
+        clearInterval(timer);
+    }
+}
+```
+
 ## When Not To Use It
 
 If you don't want to be notified about variables that are never reassigned after initial assignment, you can safely disable this rule.
@@ -161,6 +202,7 @@ If you don't want to be notified about variables that are never reassigned after
 ## Related Rules
 
 * [no-var](no-var)
+* [no-use-before-define](no-use-before-define)
 
 ## Version
 

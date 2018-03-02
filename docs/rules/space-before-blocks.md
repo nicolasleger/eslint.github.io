@@ -1,12 +1,13 @@
 ---
-title: Rule space-before-blocks
+title: space-before-blocks - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-before-blocks.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Require Or Disallow Space Before Blocks (space-before-blocks)
 
-(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Consistency is an important part of any style guide.
 While it is a personal preference where to put the opening brace of blocks,
@@ -27,13 +28,13 @@ then all blocks should never have any preceding space. If different spacing is d
 blocks, keyword blocks and classes, an optional configuration object can be passed as the rule argument to
 configure the cases separately.
 
-( e.g. `{ "functions": "never", "keywords": "always", classes: "always" }` )
+( e.g. `{ "functions": "never", "keywords": "always", "classes": "always" }` )
 
 The default is `"always"`.
 
 ### "always"
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule with the "always" option:
 
 ```js
 /*eslint space-before-blocks: "error"*/
@@ -55,7 +56,7 @@ class Foo{
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the "always" option:
 
 ```js
 /*eslint space-before-blocks: "error"*/
@@ -82,7 +83,7 @@ try {} catch(a) {}
 
 ### "never"
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule with the "never" option:
 
 ```js
 /*eslint space-before-blocks: ["error", "never"]*/
@@ -100,7 +101,7 @@ for (;;) {
 try {} catch(a) {}
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the "never" option:
 
 ```js
 /*eslint space-before-blocks: ["error", "never"]*/
@@ -122,10 +123,10 @@ class Foo{
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "never", "keywords": "always", classes: "never" }`:
+Examples of **incorrect** code for this rule when configured `{ "functions": "never", "keywords": "always", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", "classes": "never" }]*/
 /*eslint-env es6*/
 
 function a() {}
@@ -137,11 +138,10 @@ class Foo{
 }
 ```
 
-
-The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "always", classes: "never" }`:
+Examples of **correct** code for this rule when configured `{ "functions": "never", "keywords": "always", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "always", "classes": "never" }]*/
 /*eslint-env es6*/
 
 for (;;) {
@@ -157,10 +157,10 @@ class Foo {
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "always", "keywords": "never", classes: "never" }`:
+Examples of **incorrect** code for this rule when configured `{ "functions": "always", "keywords": "never", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", "classes": "never" }]*/
 /*eslint-env es6*/
 
 function a(){}
@@ -172,11 +172,10 @@ class Foo {
 }
 ```
 
-
-The following patterns are not considered problems when configured `{ "functions": "always", "keywords": "never", classes: "never" }`:
+Examples of **correct** code for this rule when configured `{ "functions": "always", "keywords": "never", "classes": "never" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", classes: "never" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "always", "keywords": "never", "classes": "never" }]*/
 /*eslint-env es6*/
 
 if (a){
@@ -190,10 +189,10 @@ class Foo{
 }
 ```
 
-The following patterns are considered problems when configured `{ "functions": "never", "keywords": "never", classes: "always" }`:
+Examples of **incorrect** code for this rule when configured `{ "functions": "never", "keywords": "never", "classes": "always" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", classes: "always" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", "classes": "always" }]*/
 /*eslint-env es6*/
 
 class Foo{
@@ -201,11 +200,10 @@ class Foo{
 }
 ```
 
-
-The following patterns are not considered problems when configured `{ "functions": "never", "keywords": "never", classes: "always" }`:
+Examples of **correct** code for this rule when configured `{ "functions": "never", "keywords": "never", "classes": "always" }`:
 
 ```js
-/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", classes: "always" }]*/
+/*eslint space-before-blocks: ["error", { "functions": "never", "keywords": "never", "classes": "always" }]*/
 /*eslint-env es6*/
 
 class Foo {
@@ -215,7 +213,7 @@ class Foo {
 
 ## When Not To Use It
 
-You can turn this rule off if you are not concerned with the consistency of spacing before blocks or if you are using the `space-after-keywords` rule set to `"never"`.
+You can turn this rule off if you are not concerned with the consistency of spacing before blocks.
 
 ## Related Rules
 

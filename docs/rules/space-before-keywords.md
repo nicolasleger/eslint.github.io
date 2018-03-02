@@ -1,14 +1,15 @@
 ---
-title: Rule space-before-keywords
+title: space-before-keywords - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-before-keywords.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require or disallow spaces before keywords (space-before-keywords)
+# space-before-keywords: enforce consistent spacing before keywords
 
-**Replacement notice**: This rule was removed in ESLint v2.0 and replaced by [keyword-spacing](keyword-spacing) rule.
+(removed) This rule was **removed** in ESLint v2.0 and **replaced** by the [keyword-spacing](keyword-spacing) rule.
 
-(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixed problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) automatically fixed problems reported by this rule.
 
 Keywords are syntax elements of JavaScript, such as `function` and `if`. These identifiers have special meaning to the language and so often appear in a different color in code editors. As an important part of the language, style guides often refer to the spacing that should be used around keywords. For example, you might have a style guide that says keywords should be always be preceded by spaces, which would mean `if-else` statements must look like this:
 
@@ -34,44 +35,9 @@ must be preceded by at least one space. If `"never"` then no spaces will be allo
 the keywords `else`, `while` (do...while), `finally` and `catch`. The default value is `"always"`.
 
 This rule will allow keywords to be preceded by an opening curly brace (`{`). If you wish to alter
-this behaviour, consider using the [block-spacing](block-spacing) rule.
+this behavior, consider using the [block-spacing](block-spacing) rule.
 
-The following patterns are considered errors when configured `"never"`:
-
-```js
-/*eslint space-before-keywords: ["error", "never"]*/
-
-if (foo) {
-    // ...
-} else {}
-
-do {
-
-}
-while (foo)
-
-try {} finally {}
-
-try {} catch(e) {}
-```
-
-The following patterns are not considered errors when configured `"never"`:
-
-```js
-/*eslint space-before-keywords: ["error", "never"]*/
-
-if (foo) {
-    // ...
-}else {}
-
-do {}while (foo)
-
-try {}finally {}
-
-try{}catch(e) {}
-```
-
-The following patterns are considered errors when configured `"always"`:
+Examples of **incorrect** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint space-before-keywords: ["error", "always"]*/
@@ -90,7 +56,7 @@ function bar() {
 }
 ```
 
-The following patterns are not considered errors when configured `"always"`:
+Examples of **correct** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint space-before-keywords: ["error", "always"]*/
@@ -105,6 +71,41 @@ if (foo) {
 <Foo onClick={function bar() {}} />
 
 for (let foo of ['bar', 'baz', 'qux']) {}
+```
+
+Examples of **incorrect** code for this rule with the `"never"` option:
+
+```js
+/*eslint space-before-keywords: ["error", "never"]*/
+
+if (foo) {
+    // ...
+} else {}
+
+do {
+
+}
+while (foo)
+
+try {} finally {}
+
+try {} catch(e) {}
+```
+
+Examples of **correct** code for this rule with the `"never"` option:
+
+```js
+/*eslint space-before-keywords: ["error", "never"]*/
+
+if (foo) {
+    // ...
+}else {}
+
+do {}while (foo)
+
+try {}finally {}
+
+try{}catch(e) {}
 ```
 
 ## When Not To Use It

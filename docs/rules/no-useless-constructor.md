@@ -1,6 +1,7 @@
 ---
-title: Rule no-useless-constructor
+title: no-useless-constructor - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-useless-constructor.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -25,7 +26,9 @@ class A extends B {
 
 This rule flags class constructors that can be safely removed without changing how the class works.
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-useless-constructor: "error"*/
@@ -43,7 +46,7 @@ class A extends B {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-useless-constructor: "error"*/

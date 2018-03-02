@@ -1,7 +1,10 @@
 ---
 title: Pull Requests
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/contributing/pull-requests.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # Pull Requests
 
 If you want to contribute to an ESLint repo, please use a GitHub pull request. This is the fastest way for us to evaluate your code and to merge it into the code base. Please don't file an issue with snippets of code. Doing so means that we need to manually merge the changes in and update any appropriate tests. That decreases the likelihood that your code is going to get included in a timely manner. Please use pull requests.
@@ -10,10 +13,9 @@ If you want to contribute to an ESLint repo, please use a GitHub pull request. T
 
 If you'd like to work on a pull request and you've never submitted code before, follow these steps:
 
-1. Sign our [Contributor License Agreement](/cla).
+1. Sign our [Contributor License Agreement](https://cla.js.foundation/eslint/eslint).
 1. Set up a [development environment](../development-environment).
-1. Ensure there's an issue that describes what you're doing. You can create a new issue or just indicate you're [working on an existing issue](working-on-issues).
-  * Exception: documentation-only changes do not require an issue.
+1. If you want to implement a breaking change or a change to the core, ensure there's an issue that describes what you're doing and the issue has been accepted. You can create a new issue or just indicate you're [working on an existing issue](working-on-issues). Bug fixes, documentation changes, and other pull requests do not require an issue.
 
 After that, you're ready to start working on code.
 
@@ -25,8 +27,8 @@ The process of submitting a pull request is fairly straightforward and generally
 2. [Make your changes](#step2)
 3. [Rebase onto upstream](#step3)
 4. [Run the tests](#step4)
-5. [Squash your commits](#step5)
-6. [Double check your submission](#step6)
+5. [Double check your submission](#step5)
+6. [Push your changes](#step6)
 7. [Submit the pull request](#step7)
 
 Details about each step are found below.
@@ -65,23 +67,24 @@ The first line of the commit message (the summary) must have a specific format. 
 The `Tag` is one of the following:
 
 * `Fix` - for a bug fix.
+* `Update` - either for a backwards-compatible enhancement or for a rule change that adds reported problems.
 * `New` - implemented a new feature.
-* `Update` - for a backwards-compatible enhancement.
 * `Breaking` - for a backwards-incompatible enhancement or feature.
 * `Docs` - changes to documentation only.
 * `Build` - changes to build process only.
 * `Upgrade` - for a dependency upgrade.
+* `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing).
 
-Use the [labels of the issue you are working on](working-on-issues#issue-labels) to determine the best tag.
+Use the [labels of the issue you are working on](working-on-issues) to determine the best tag.
 
-The message summary should be a one-sentence description of the change, and it must be 72 characters in length or shorter. The issue number should be mentioned at the end. If the commit doesn't completely fix the issue, then use `(refs #1234)` instead of `(fixes #1234)`.
+The message summary should be a one-sentence description of the change, and it must be 72 characters in length or shorter. If the pull request addresses an issue, then the issue number should be mentioned at the end. If the commit doesn't completely fix the issue, then use `(refs #1234)` instead of `(fixes #1234)`.
 
 Here are some good commit message summary examples:
 
 ```
 Build: Update Travis to only test Node 0.10 (refs #734)
 Fix: Semi rule incorrectly flagging extra semicolon (fixes #840)
-Upgrade: Esprima to 1.2, switch to using Esprima comment attachment (fixes #730)
+Upgrade: Esprima to 1.2, switch to using comment attachment (fixes #730)
 ```
 
 The commit message format is important because these messages are used to create a changelog for each release. The tag and issue number help to create more consistent and useful changelogs.
@@ -103,25 +106,34 @@ After rebasing, be sure to run all of the tests once again to make sure nothing 
 npm test
 ```
 
-### Step 5: Squash your commits<a name="step5"></a>
+If there are any failing tests, update your code until all tests pass.
 
-ESLint requires just one commit per pull request. If you have used multiple commits, be sure to [squash](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html) your commits.
-
-### Step 6: Double check your submission<a name="step6"></a>
+### Step 5: Double check your submission<a name="step5"></a>
 
 With your code ready to go, this is a good time to double-check your submission to make sure it follows our conventions. Here are the things to check:
 
-* Run `npm run check-commit` to double-check that your commit is formatted correctly.
-* Make sure there is an issue for any pull request you send.
-    * The only exception is for documentation changes.
+* Make sure your commit is formatted correctly.
 * The pull request must have a description. The description should explain what you did and how its effects can be seen.
 * The commit message is properly formatted.
 * The change introduces no functional regression. Be sure to run `npm test` to verify your changes before submitting a pull request.
 * Make separate pull requests for unrelated changes. Large pull requests with multiple unrelated changes may be closed without merging.
 * All changes must be accompanied by tests, even if the feature you're working on previously had no tests.
 * All user-facing changes must be accompanied by appropriate documentation.
-* Only *one commit* is allowed per pull request. If you have multiple commits, you'll be asked to squash them.
 * Follow the [Code Conventions](../code-conventions.html).
+
+### Step 6: Push your changes<a name="step6"></a>
+
+Next, push your changes to your clone:
+
+```
+git push origin issue1234
+```
+
+If you are unable to push because some references are old, do a forced push instead:
+
+```
+git push -f origin issue1234
+```
 
 ### Step 7: Send the pull request<a name="step7"></a>
 
@@ -155,15 +167,15 @@ If we ask you to make code changes, there's no need to close the pull request an
 
 ```
 $ git add -A
-$ git commit --amend --no-edit
-$ git push origin issue1234 -f
+$ git commit
+$ git push origin issue1234
 ```
 
-This snippets adds all your new changes, then amends the previous commit with them. The `--no-edit` means you don't want to edit the commit message; you can omit that option if you need to make commit message changes as well.
+When updating the code, it's usually better to add additional commits to your branch rather than amending the original commit, because reviewers can easily tell which changes were made in response to a particular review. When we merge pull requests, we will squash all the commits from your branch into a single commit on the `master` branch.
 
 ### Rebasing
 
-If your code is out-of-date, we might ask you to rebase. That means we want you to apply your changes on top of the latest upstream code. You can do so via:
+If your code is out-of-date, we might ask you to rebase. That means we want you to apply your changes on top of the latest upstream code. Make sure you have set up a [development environment](../development-environment) and then you can rebase using these commands:
 
 ```
 $ git fetch upstream
@@ -171,14 +183,6 @@ $ git rebase upstream/master
 ```
 
 You might find that there are merge conflicts when you attempt to rebase. Please [resolve the conflicts](https://help.github.com/articles/resolving-merge-conflicts-after-a-git-rebase/) and then do a forced push to your branch:
-
-```
-$ git push origin issue1234 -f
-```
-
-### Squashing
-
-If you have more than one commit on your pull request, we'll ask you to [squash your commits](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html). Once your commits are squashed, you can do a forced push to update your branch:
 
 ```
 $ git push origin issue1234 -f

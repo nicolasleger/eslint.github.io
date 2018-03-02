@@ -1,10 +1,13 @@
 ---
-title: Rule prefer-template
+title: prefer-template - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-template.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Suggest using template literals instead of string concatenation. (prefer-template)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In ES2015 (ES6), we can use template literals instead of string concatenation.
 
@@ -22,7 +25,9 @@ var str = `Hello, ${name}!`;
 
 This rule is aimed to flag usage of `+` operators with strings.
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint prefer-template: "error"*/
@@ -31,7 +36,7 @@ var str = "Hello, " + name + "!";
 var str = "Time: " + (12 * 60 * 60 * 1000);
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint prefer-template: "error"*/
@@ -53,6 +58,7 @@ In ES2015 (ES6) or later, if you don't want to be notified about string concaten
 
 ## Related Rules
 
+* [no-useless-concat](no-useless-concat)
 * [quotes](quotes)
 
 ## Version

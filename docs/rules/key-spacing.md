@@ -1,96 +1,163 @@
 ---
-title: Rule key-spacing
+title: key-spacing - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/key-spacing.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce Property Spacing (key-spacing)
+# enforce consistent spacing between keys and values in object literal properties (key-spacing)
 
-This rule enforces spacing around the colon in object literal properties. It can verify each property individually, or it can ensure vertical alignment of groups of properties in an object literal.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+
+This rule enforces spacing around the colon in object literal properties. It can verify each property individually, or it can ensure horizontal alignment of adjacent properties in an object literal.
 
 ## Rule Details
 
-This rule will warn when spacing in properties does not match the specified options. In the case of long lines, it is acceptable to add a new line wherever whitespace is allowed. There are three modes:
+This rule enforces consistent spacing between keys and values in object literal properties. In the case of long lines, it is acceptable to add a new line wherever whitespace is allowed.
 
 ## Options
 
-Use the `beforeColon`, `afterColon` and `mode` options to enforce having one space or zero spaces on each side, using `true` or `false`, respectively. The default is no whitespace between the key and the colon and one space between the colon and the value.
+This rule has an object option:
 
-`mode` option can be either `"strict"` or `"minimum"` and defaults to `"strict"`. In `strict` mode, it enforces exactly 1 space before or after the colon where as in `minimum` mode, it enforces at least 1 space but more are okay.
+* `"beforeColon": false (default) | true`
+    * `false`: disallows spaces between the key and the colon in object literals.
+    * `true`: requires at least one space between the key and the colon in object literals.
+* `"afterColon": true (default) | false`
+    * `true`: requires at least one space between the colon and the value in object literals.
+    * `false`: disallows spaces between the colon and the value in object literals.
+* `"mode": "strict" (default) | "minimum"`
+    * `"strict"`: enforces exactly one space before or after colons in object literals.
+    * `"minimum"`: enforces one or more spaces before or after colons in object literals.
+* `"align": "value" | "colon"`
+    * `"value"`: enforces horizontal alignment of values in object literals.
+    * `"colon"` enforces horizontal alignment of both colons and values in object literals.
+* `"align"` with an object value allows for fine-grained spacing when values are being aligned in object literals.
+* `"singleLine"` specifies a spacing style for single-line object literals.
+* `"multiLine"` specifies a spacing style for multi-line object literals.
 
-The following patterns are considered valid:
+Please note that you can either use the top-level options or the grouped options (`singleLine` and `multiLine`) but not both.
+
+### beforeColon
+
+Examples of **incorrect** code for this rule with the default `{ "beforeColon": false }` option:
 
 ```js
-// DEFAULT
-/*eslint key-spacing: ["error", {"beforeColon": false, "afterColon": true}]*/
+/*eslint key-spacing: ["error", { "beforeColon": false }]*/
 
-var obj = { "foo": (42) };
-
-foo = { thisLineWouldBeTooLong:
-    soUseAnotherLine };
+var obj = { "foo" : 42 };
 ```
 
+Examples of **correct** code for this rule with the default `{ "beforeColon": false }` option:
+
 ```js
-/*eslint key-spacing: ["error", {"beforeColon": true, "afterColon": false}]*/
+/*eslint key-spacing: ["error", { "beforeColon": false }]*/
+
+var obj = { "foo": 42 };
+```
+
+Examples of **incorrect** code for this rule with the `{ "beforeColon": true }` option:
+
+```js
+/*eslint key-spacing: ["error", { "beforeColon": true }]*/
+
+var obj = { "foo": 42 };
+```
+
+Examples of **correct** code for this rule with the `{ "beforeColon": true }` option:
+
+```js
+/*eslint key-spacing: ["error", { "beforeColon": true }]*/
+
+var obj = { "foo" : 42 };
+```
+
+### afterColon
+
+Examples of **incorrect** code for this rule with the default `{ "afterColon": true }` option:
+
+```js
+/*eslint key-spacing: ["error", { "afterColon": true }]*/
+
+var obj = { "foo":42 };
+```
+
+Examples of **correct** code for this rule with the default `{ "afterColon": true }` option:
+
+```js
+/*eslint key-spacing: ["error", { "afterColon": true }]*/
+
+var obj = { "foo": 42 };
+```
+
+Examples of **incorrect** code for this rule with the `{ "afterColon": false }` option:
+
+```js
+/*eslint key-spacing: ["error", { "afterColon": false }]*/
+
+var obj = { "foo": 42 };
+```
+
+Examples of **correct** code for this rule with the `{ "afterColon": false }` option:
+
+```js
+/*eslint key-spacing: ["error", { "afterColon": false }]*/
+
+var obj = { "foo":42 };
+```
+
+### mode
+
+Examples of **incorrect** code for this rule with the default `{ "mode": "strict" }` option:
+
+```js
+/*eslint key-spacing: ["error", { "mode": "strict" }]*/
 
 call({
-    foobar :42,
-    bat :(2 * 2)
+    foobar: 42,
+    bat:    2 * 2
 });
 ```
 
+Examples of **correct** code for this rule with the default `{ "mode": "strict" }` option:
+
 ```js
-/*eslint key-spacing: ["error", {"beforeColon": true, "afterColon": false, "mode": "minimum"}]*/
+/*eslint key-spacing: ["error", { "mode": "strict" }]*/
 
 call({
-    foobar   :42,
-    bat :(2 * 2)
+    foobar: 42,
+    bat: 2 * 2
 });
 ```
 
-The following patterns are considered problems:
+Examples of **correct** code for this rule with the `{ "mode": "minimum" }` option:
 
 ```js
-/*eslint key-spacing: ["error", {"beforeColon": false, "afterColon": false}]*/
+/*eslint key-spacing: ["error", { "mode": "minimum" }]*/
 
-var obj = { foo: 42 };
-var bar = { baz :52 };
-
-foo = { thisLineWouldBeTooLong:
-    soUseAnotherLine };
+call({
+    foobar: 42,
+    bat:    2 * 2
+});
 ```
 
-```js
-/*eslint key-spacing: ["error", {"beforeColon": true, "afterColon": true}]*/
+### align
 
-function foo() {
-    return {
-        foobar: 42,
-        bat :"value"
-    };
-}
-```
-
-```js
-/*eslint key-spacing: ["error", {"beforeColon": true, "afterColon": true}]*/
-
-function foo() {
-    return {
-        foobar  : 42,
-        bat :  "value"
-    };
-}
-```
-
-### `"align": "value"`
-
-Use the `align` option to enforce vertical alignment of values in an object literal. This mode still respects `beforeColon` and `afterColon` where possible, but it will pad with spaces after the colon where necessary. Groups of properties separated by blank lines are considered distinct and can have different alignment than other groups. Single line object literals will not be checked for vertical alignment, but each property will still be checked for `beforeColon` and `afterColon`.
-
-The following patterns are considered valid:
+Examples of **incorrect** code for this rule with the `{ "align": "value" }` option:
 
 ```js
 /*eslint key-spacing: ["error", { "align": "value" }]*/
-// beforeColon and afterColon default to false and true, respectively
+
+var obj = {
+    a: value,
+    bcde:  42,
+    fg :   foo()
+};
+```
+
+Examples of **correct** code for this rule with the `{ "align": "value" }` option:
+
+```js
+/*eslint key-spacing: ["error", { "align": "value" }]*/
 
 var obj = {
     a:    value,
@@ -106,74 +173,150 @@ var obj = {
 var obj = { a: "foo", longPropertyName: "bar" };
 ```
 
+Examples of **incorrect** code for this rule with the `{ "align": "colon" }` option:
+
 ```js
-/*eslint key-spacing: ["error", { "align": "value", "beforeColon": true, "afterColon": false }]*/
+/*eslint key-spacing: ["error", { "align": "colon" }]*/
 
 call({
-    'a' :[],
-    b :  []
+    foobar: 42,
+    bat:    2 * 2
 });
 ```
 
-The following patterns are considered problems:
-
-```js
-/*eslint key-spacing: ["error", { "align": "value" }]*/
-
-var obj = {
-    a: value,
-    bcde:  42,
-    fg :   foo()
-};
-```
-
-### `"align": "colon"`
-
-The `align` option can also vertically align colons and values together. Whereas with `"value"` alignment, padding belongs right of the colon, with `"colon"` alignment, padding goes to the left of the colon. Except in the case of padding, it still respects `beforeColon` and `afterColon`. As with `"value"` alignment, groups of properties separated by blank lines are considered distinct and can have different alignment than other groups.
-
-The following patterns are considered valid:
+Examples of **correct** code for this rule with the `{ "align": "colon" }` option:
 
 ```js
 /*eslint key-spacing: ["error", { "align": "colon" }]*/
 
+call({
+    foobar: 42,
+    bat   : 2 * 2
+});
+```
+
+### align
+
+The `align` option can take additional configuration through the `beforeColon`, `afterColon`, `mode`, and `on` options.
+
+If `align` is defined as an object, but not all of the parameters are provided, undefined parameters will default to the following:
+
+```js
+// Defaults
+align: {
+    "beforeColon": false,
+    "afterColon": true,
+    "on": "colon",
+    "mode": "strict"
+}
+```
+
+Examples of **correct** code for this rule with sample `{ "align": { } }` options:
+
+```js
+/*eslint key-spacing: ["error", {
+    "align": {
+        "beforeColon": true,
+        "afterColon": true,
+        "on": "colon"
+    }
+}]*/
+
 var obj = {
-    foobar   : 42,
-    bat      : (2 * 2),
-    "default": fn(),
-
-    fn : function() {},
-    abc: value
-};
+    "one"   : 1,
+    "seven" : 7
+}
 ```
 
 ```js
-/*eslint key-spacing: ["error", { "align": "colon", "beforeColon": true, "afterColon": false }]*/
-
-obj = {
-    first  :1,
-    second :2,
-    third  :3
-};
-```
-
-The following patterns are considered problems:
-
-```js
-/*eslint key-spacing: ["error", { "align": "colon" }]*/
+/*eslint key-spacing: ["error", {
+    "align": {
+        "beforeColon": false,
+        "afterColon": false,
+        "on": "value"
+    }
+}]*/
 
 var obj = {
-    one:   1,
-    "two": 2,
-    three:  3
-};
+    "one":  1,
+    "seven":7
+}
 ```
 
-### Fine-grained control
+### align and multiLine
 
-You can specify these options separately for single-line and multi-line configurations by organizing the options this way:
+The `multiLine` and `align` options can differ, which allows for fine-tuned control over the `key-spacing` of your files.  `align` will **not** inherit from `multiLine` if `align` is configured as an object.
+
+`multiLine` is used any time  an object literal spans multiple lines.  The `align` configuration is used when there is a group of properties in the same object. For example:
+
+```javascript
+var myObj = {
+  key1: 1, // uses multiLine
+
+  key2: 2, // uses align (when defined)
+  key3: 3, // uses align (when defined)
+
+  key4: 4 // uses multiLine
+}
+
+```
+
+Examples of **incorrect** code for this rule with sample `{ "align": { }, "multiLine": { } }` options:
 
 ```js
-"key-spacing": [2, {
+/*eslint key-spacing: ["error", {
+    "multiLine": {
+        "beforeColon": false,
+        "afterColon":true
+    },
+    "align": {
+        "beforeColon": true,
+        "afterColon": true,
+        "on": "colon"
+    }
+}]*/
+
+var obj = {
+    "myObjectFunction": function() {
+        // Do something
+    },
+    "one"             : 1,
+    "seven"           : 7
+}
+```
+
+Examples of **correct** code for this rule with sample `{ "align": { }, "multiLine": { } }` options:
+
+```js
+/*eslint key-spacing: ["error", {
+    "multiLine": {
+        "beforeColon": false,
+        "afterColon": true
+
+    },
+    "align": {
+        "beforeColon": true,
+        "afterColon": true,
+        "on": "colon"
+    }
+}]*/
+
+var obj = {
+    "myObjectFunction": function() {
+        // Do something
+        //
+    }, // These are two separate groups, so no alignment between `myObjectFuction` and `one`
+    "one"   : 1,
+    "seven" : 7 // `one` and `seven` are in their own group, and therefore aligned
+}
+```
+
+### singleLine and multiLine
+
+Examples of **correct** code for this rule with sample `{ "singleLine": { }, "multiLine": { } }` options:
+
+```js
+/*eslint "key-spacing": [2, {
     "singleLine": {
         "beforeColon": false,
         "afterColon": true
@@ -183,20 +326,13 @@ You can specify these options separately for single-line and multi-line configur
         "afterColon": true,
         "align": "colon"
     }
-}]
-```
-
-The following patterns are considered valid:
-
-```js
-var obj = {one: 1, "two": 2, three: 3}; /* valid due to `singleLine:{ beforeColon: false }`*/
+}]*/
+var obj = { one: 1, "two": 2, three: 3 };
 var obj2 = {
     "two" : 2,
     three : 3
 };
 ```
-
-Please note that you can either use the top-level options or the grouped options (`singleLine` and `multiLine`) but not both.
 
 ## When Not To Use It
 

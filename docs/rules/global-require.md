@@ -1,6 +1,7 @@
 ---
-title: Rule global-require
+title: global-require - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/global-require.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -92,7 +93,7 @@ var x = require("x"),
 
 ## When Not To Use It
 
-If you have a module that must be initialized with information that comes from the file-system or if a module is only used in very rare situations and will cause significant overhead to load it may make sense to disable the rule. If you need to `require()` an optional dependency inside of a `try`/`catch`, you can disable this rule for just that dependency using the `// eslint disable-line global-require` comment.
+If you have a module that must be initialized with information that comes from the file-system or if a module is only used in very rare situations and will cause significant overhead to load it may make sense to disable the rule. If you need to `require()` an optional dependency inside of a `try`/`catch`, you can disable this rule for just that dependency using the `// eslint-disable-line global-require` comment.
 
 ## Version
 

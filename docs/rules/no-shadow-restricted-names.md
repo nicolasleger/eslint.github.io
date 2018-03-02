@@ -1,6 +1,7 @@
 ---
-title: Rule no-shadow-restricted-names
+title: no-shadow-restricted-names - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-shadow-restricted-names.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -42,8 +43,8 @@ function f(a, b){}
 
 ## Further Reading
 
-* [Annotated ES5 - §15.1.1](http://es5.github.io/#x15.1.1)
-* [Annotated ES5 - Annex C](http://es5.github.io/#C)
+* [Annotated ES5 - §15.1.1](https://es5.github.io/#x15.1.1)
+* [Annotated ES5 - Annex C](https://es5.github.io/#C)
 
 ## Related Rules
 

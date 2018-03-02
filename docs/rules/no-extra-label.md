@@ -1,10 +1,13 @@
 ---
-title: Rule no-extra-label
+title: no-extra-label - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-extra-label.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow Unnecessary Labels (no-extra-label)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 If a loop contains no nested loops or switches, labeling the loop is unnecessary.
 

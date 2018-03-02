@@ -1,16 +1,19 @@
 ---
-title: Rule no-duplicate-case
+title: no-duplicate-case - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-duplicate-case.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Rule to disallow a duplicate case label (no-duplicate-case)
 
-If a switch statement has duplicate case labels, it is likely that a programmer copied a case but forgot to change the label.
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+If a `switch` statement has duplicate test expressions in `case` clauses, it is likely that a programmer copied a `case` clause but forgot to change the test expression.
 
 ## Rule Details
 
-This rule is aimed at eliminating duplicate case labels in switch statements
+This rule disallows duplicate test expressions in `case` clauses of `switch` statements.
 
 Examples of **incorrect** code for this rule:
 
@@ -25,7 +28,7 @@ switch (a) {
         break;
     case 2:
         break;
-    case 1:         // duplicate case label
+    case 1:         // duplicate test expression
         break;
     default:
         break;
@@ -36,7 +39,7 @@ switch (a) {
         break;
     case 2:
         break;
-    case one:         // duplicate case label
+    case one:         // duplicate test expression
         break;
     default:
         break;
@@ -47,7 +50,7 @@ switch (a) {
         break;
     case "2":
         break;
-    case "1":         // duplicate case label
+    case "1":         // duplicate test expression
         break;
     default:
         break;

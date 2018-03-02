@@ -1,10 +1,11 @@
 ---
-title: Rule new-cap
+title: new-cap - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/new-cap.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Require Constructors to Use Initial Caps (new-cap)
+# require constructor names to begin with a capital letter (new-cap)
 
 The `new` operator in JavaScript creates a new instance of a particular type of object. That type of object is represented by a constructor function. Since constructor functions are just regular functions, the only defining characteristic is that `new` is being used as part of the call. Native JavaScript functions begin with an uppercase letter to distinguish those functions that are to be used as constructors from functions that are not. Many style guides recommend following this pattern to more easily determine which functions are to be used as constructors.
 
@@ -14,60 +15,7 @@ var friend = new Person();
 
 ## Rule Details
 
-This rule is aimed at helping to distinguish regular functions from constructor functions. As such, it warns whenever it sees `new` followed by an identifier that isn't capitalized or whenever it sees capitalized function called directly without `new` operator.
-
-The following patterns are considered problems:
-
-```js
-/*eslint new-cap: "error"*/
-
-var friend = new person();
-var colleague = Person();
-```
-
-The following patterns are not considered problems:
-
-```js
-/*eslint new-cap: "error"*/
-
-var friend = new Person();
-var colleague = person();
-```
-
-```js
-/*eslint new-cap: ["error", {"capIsNewExceptions": ["Person"]}]*/
-
-var colleague = Person();
-var colleague = foo.Person();
-var colleague = foo.bar.Person();
-```
-
-```js
-/*eslint new-cap: ["error", {"capIsNewExceptions": ["foo.Person"]}]*/
-
-var colleague = foo.Person();
-```
-
-## Options
-
-By default both `newIsCap` and `capIsNew` options are set to `true`.
-
-### `newIsCap`
-
-When `true`, rule checks if all `new` operators are called only with uppercase-started functions.
-
-### `capIsNew`
-
-When `true`, rule checks if all uppercase-started functions are called only with `new` operator.
-
-### `newIsCapExceptions`
-
-Array of lowercase function names that are permitted to be used with the `new` operator.
-If provided, it must be an `Array`.
-
-### `capIsNewExceptions`
-
-Array of uppercase-starting function names that are permitted to be used without the `new` operator. If not provided, `capIsNewExceptions` defaults to the following:
+This rule requires constructor names to begin with a capital letter. Certain built-in identifiers are exempt from this rule. These identifiers are:
 
 * `Array`
 * `Boolean`
@@ -80,11 +28,154 @@ Array of uppercase-starting function names that are permitted to be used without
 * `String`
 * `Symbol`
 
-If provided, it must be an `Array`. The default values will continue to be excluded when `capIsNewExceptions` is provided.
+Examples of **correct** code for this rule:
 
-### `properties`
+```js
+/*eslint new-cap: "error"*/
 
-By default, this rule will check properties such as `object.Property` using the other options (default value is `true`). When set to `false`, this rule will not check properties so `new object.property()` is valid even when `newIsCap` is `true`.
+function foo(arg) {
+    return Boolean(arg);
+}
+```
+
+## Options
+
+This rule has an object option:
+
+* `"newIsCap": true` (default) requires all `new` operators to be called with uppercase-started functions.
+* `"newIsCap": false` allows `new` operators to be called with lowercase-started or uppercase-started functions.
+* `"capIsNew": true` (default) requires all uppercase-started functions to be called with `new` operators.
+* `"capIsNew": false` allows uppercase-started functions to be called without `new` operators.
+* `"newIsCapExceptions"` allows specified lowercase-started function names to be called with the `new` operator.
+* `"newIsCapExceptionPattern"` allows any lowercase-started function names that match the specified regex pattern to be called with the `new` operator.
+* `"capIsNewExceptions"` allows specified uppercase-started function names to be called without the `new` operator.
+* `"capIsNewExceptionPattern"` allows any uppercase-started function names that match the specified regex pattern to be called without the `new` operator.
+* `"properties": true` (default) enables checks on object properties
+* `"properties": false` disables checks on object properties
+
+### newIsCap
+
+Examples of **incorrect** code for this rule with the default `{ "newIsCap": true }` option:
+
+```js
+/*eslint new-cap: ["error", { "newIsCap": true }]*/
+
+var friend = new person();
+```
+
+Examples of **correct** code for this rule with the default `{ "newIsCap": true }` option:
+
+```js
+/*eslint new-cap: ["error", { "newIsCap": true }]*/
+
+var friend = new Person();
+```
+
+Examples of **correct** code for this rule with the `{ "newIsCap": false }` option:
+
+```js
+/*eslint new-cap: ["error", { "newIsCap": false }]*/
+
+var friend = new person();
+```
+
+### capIsNew
+
+Examples of **incorrect** code for this rule with the default `{ "capIsNew": true }` option:
+
+```js
+/*eslint new-cap: ["error", { "capIsNew": true }]*/
+
+var colleague = Person();
+```
+
+Examples of **correct** code for this rule with the default `{ "capIsNew": true }` option:
+
+```js
+/*eslint new-cap: ["error", { "capIsNew": true }]*/
+
+var colleague = new Person();
+```
+
+Examples of **correct** code for this rule with the `{ "capIsNew": false }` option:
+
+```js
+/*eslint new-cap: ["error", { "capIsNew": false }]*/
+
+var colleague = Person();
+```
+
+### newIsCapExceptions
+
+Examples of additional **correct** code for this rule with the `{ "newIsCapExceptions": ["events"] }` option:
+
+```js
+/*eslint new-cap: ["error", { "newIsCapExceptions": ["events"] }]*/
+
+var events = require('events');
+
+var emitter = new events();
+```
+
+### newIsCapExceptionPattern
+
+Examples of additional **correct** code for this rule with the `{ "newIsCapExceptionPattern": "^person\.." }` option:
+
+```js
+/*eslint new-cap: ["error", { "newIsCapExceptionPattern": "^person\.." }]*/
+
+var friend = new person.acquaintance();
+var bestFriend = new person.friend();
+```
+
+### capIsNewExceptions
+
+Examples of additional **correct** code for this rule with the `{ "capIsNewExceptions": ["Person"] }` option:
+
+```js
+/*eslint new-cap: ["error", { "capIsNewExceptions": ["Person"] }]*/
+
+function foo(arg) {
+    return Person(arg);
+}
+```
+
+### capIsNewExceptionPattern
+
+Examples of additional **correct** code for this rule with the `{ "capIsNewExceptionPattern": "^Person\.." }` option:
+
+```js
+/*eslint new-cap: ["error", { "capIsNewExceptionPattern": "^Person\.." }]*/
+
+var friend = person.Acquaintance();
+var bestFriend = person.Friend();
+```
+
+### properties
+
+Examples of **incorrect** code for this rule with the default `{ "properties": true }` option:
+
+```js
+/*eslint new-cap: ["error", { "properties": true }]*/
+
+var friend = new person.acquaintance();
+```
+
+Examples of **correct** code for this rule with the default `{ "properties": true }` option:
+
+```js
+/*eslint new-cap: ["error", { "properties": true }]*/
+
+var friend = new person.Acquaintance();
+```
+
+Examples of **correct** code for this rule with the `{ "properties": false }` option:
+
+```js
+/*eslint new-cap: ["error", { "properties": false }]*/
+
+var friend = new person.acquaintance();
+```
 
 ## When Not To Use It
 

@@ -1,14 +1,15 @@
 ---
-title: Rule space-unary-ops
+title: space-unary-ops - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/space-unary-ops.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Require or disallow spaces before/after unary operators (space-unary-ops)
 
-(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
-Some styleguides require or disallow spaces before or after unary operators. This is mainly a stylistic issue, however, some JavaScript expressions can be written without spacing which makes it harder to read and maintain.
+Some style guides require or disallow spaces before or after unary operators. This is mainly a stylistic issue, however, some JavaScript expressions can be written without spacing which makes it harder to read and maintain.
 
 ## Rule Details
 
@@ -67,7 +68,7 @@ This rule has three options:
 
 In this case, spacing will be disallowed after a `new` operator and required before/after a `++` operator.
 
-Given the default values `words`: `true`, `nonwords`: `false`, the following patterns are considered problems:
+Examples of **incorrect** code for this rule with the default `{"words": true, "nonwords": false}` option:
 
 ```js
 /*eslint space-unary-ops: "error"*/
@@ -98,7 +99,15 @@ function *foo() {
 }
 ```
 
-Given the default values `words`: `true`, `nonwords`: `false`, the following patterns are not considered problems:
+```js
+/*eslint space-unary-ops: "error"*/
+
+async function foo() {
+    await(bar);
+}
+```
+
+Examples of **correct** code for this rule with the `{"words": true, "nonwords": false}` option:
 
 ```js
 /*eslint space-unary-ops: "error"*/
@@ -131,6 +140,14 @@ foo--;
 
 function *foo() {
     yield (0)
+}
+```
+
+```js
+/*eslint space-unary-ops: "error"*/
+
+async function foo() {
+    await (bar);
 }
 ```
 

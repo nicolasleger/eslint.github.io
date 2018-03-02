@@ -1,14 +1,17 @@
 ---
-title: Rule constructor-super
+title: constructor-super - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/constructor-super.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Verify calls of `super()` in constructors (constructor-super)
 
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
 Constructors of derived classes must call `super()`.
 Constructors of non derived classes must not call `super()`.
-If this is not observed, the javascript engine will raise a runtime error.
+If this is not observed, the JavaScript engine will raise a runtime error.
 
 This rule checks whether or not there is a valid `super()` call.
 
@@ -16,7 +19,7 @@ This rule checks whether or not there is a valid `super()` call.
 
 This rule is aimed to flag invalid/missing `super()` calls.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint constructor-super: "error"*/
@@ -24,32 +27,33 @@ The following patterns are considered problems:
 
 class A {
     constructor() {
-        super();
-    }
-}
-
-class A extends null {
-    constructor() {
-        super();
+        super();  // This is a SyntaxError.
     }
 }
 
 class A extends B {
-    constructor() { }
+    constructor() { }  // Would throw a ReferenceError.
+}
+
+// Classes which inherits from a non constructor are always problems.
+class A extends null {
+    constructor() {
+        super();  // Would throw a TypeError.
+    }
+}
+
+class A extends null {
+    constructor() { }  // Would throw a ReferenceError.
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint constructor-super: "error"*/
 /*eslint-env es6*/
 
 class A {
-    constructor() { }
-}
-
-class A extends null {
     constructor() { }
 }
 

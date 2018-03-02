@@ -1,6 +1,7 @@
 ---
-title: Rule vars-on-top
+title: vars-on-top - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/vars-on-top.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -8,7 +9,7 @@ layout: doc
 
 The `vars-on-top` rule generates warnings when variable declarations are not used serially at the top of a function scope or the top of a program.
 By default variable declarations are always moved (“hoisted”) invisibly to the top of their containing scope by the JavaScript interpreter.
-This rule forces the programmer to represent that behaviour by manually moving the variable declaration to the top of its containing scope.
+This rule forces the programmer to represent that behavior by manually moving the variable declaration to the top of its containing scope.
 
 ## Rule Details
 

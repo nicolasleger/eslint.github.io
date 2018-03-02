@@ -1,6 +1,7 @@
 ---
-title: Rule no-invalid-this
+title: no-invalid-this - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-invalid-this.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -12,17 +13,18 @@ Under the strict mode, `this` keywords outside of classes or class-like objects 
 
 This rule aims to flag usage of `this` keywords outside of classes or class-like objects.
 
-Basically this rule checks whether or not a function which are containing `this` keywords is a constructor or a method.
+Basically, this rule checks whether or not a function containing `this` keyword is a constructor or a method.
 
 This rule judges from following conditions whether or not the function is a constructor:
 
 * The name of the function starts with uppercase.
+* The function is assigned to a variable which starts with an uppercase letter.
 * The function is a constructor of ES2015 Classes.
 
 This rule judges from following conditions whether or not the function is a method:
 
 * The function is on an object literal.
-* The function assigns to a property.
+* The function is assigned to a property.
 * The function is a method/getter/setter of ES2015 Classes. (excepts static methods)
 
 And this rule allows `this` keywords in functions below:

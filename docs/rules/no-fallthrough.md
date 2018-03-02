@@ -1,10 +1,13 @@
 ---
-title: Rule no-fallthrough
+title: no-fallthrough - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-fallthrough.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow Case Statement Fallthrough (no-fallthrough)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 The `switch` statement in JavaScript is one of the more error-prone constructs of the language thanks in part to the ability to "fall through" from one `case` to the next. For example:
 
@@ -66,7 +69,7 @@ In this example, there is no confusion as to the expected behavior. It is clear 
 
 ## Rule Details
 
-This rule is aimed at eliminating unintentional fallthrough of one case to the other. As such, it flags and fallthrough scenarios that are not marked by a comment.
+This rule is aimed at eliminating unintentional fallthrough of one case to the other. As such, it flags any fallthrough scenarios that are not marked by a comment.
 
 Examples of **incorrect** code for this rule:
 
@@ -133,6 +136,38 @@ switch(foo) {
 ```
 
 Note that the last `case` statement in these examples does not cause a warning because there is nothing to fall through into.
+
+## Options
+
+This rule accepts a single options argument:
+
+* Set the `commentPattern` option to a regular expression string to change the test for intentional fallthrough comment
+
+### commentPattern
+
+Examples of **correct** code for the `{ "commentPattern": "break[\\s\\w]*omitted" }` option:
+
+```js
+/*eslint no-fallthrough: ["error", { "commentPattern": "break[\\s\\w]*omitted" }]*/
+
+switch(foo) {
+    case 1:
+        doSomething();
+        // break omitted
+
+    case 2:
+        doSomething();
+}
+
+switch(foo) {
+    case 1:
+        doSomething();
+        // caution: break is omitted intentionally
+
+    default:
+        doSomething();
+}
+```
 
 ## When Not To Use It
 

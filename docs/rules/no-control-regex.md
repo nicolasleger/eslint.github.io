@@ -1,24 +1,26 @@
 ---
-title: Rule no-control-regex
+title: no-control-regex - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-control-regex.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Controls Characters in Regular Expressions (no-control-regex)
+# disallow control characters in regular expressions (no-control-regex)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 Control characters are special, invisible characters in the ASCII range 0-31. These characters are rarely used in JavaScript strings so a regular expression containing these characters is most likely a mistake.
 
 ## Rule Details
 
-This rule is aimed at ensuring all regular expressions don't use control characters.
-
+This rule disallows control characters in regular expressions.
 
 Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-control-regex: "error"*/
 
-var pattern1 = /\\x1f/;
+var pattern1 = /\x1f/;
 var pattern2 = new RegExp("\x1f");
 ```
 
@@ -27,7 +29,7 @@ Examples of **correct** code for this rule:
 ```js
 /*eslint no-control-regex: "error"*/
 
-var pattern1 = /\\x20/;
+var pattern1 = /\x20/;
 var pattern2 = new RegExp("\x20");
 ```
 

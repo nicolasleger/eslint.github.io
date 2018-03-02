@@ -1,12 +1,13 @@
 ---
-title: Rule no-self-compare
+title: no-self-compare - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-self-compare.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow Self Compare (no-self-compare)
 
-Comparing a variable against itself is usually an error, either an typo or refactoring error. It is confusing to the reader and may potentially introduce a runtime error.
+Comparing a variable against itself is usually an error, either a typo or refactoring error. It is confusing to the reader and may potentially introduce a runtime error.
 
 The only time you would compare a variable against itself is when you are testing for `NaN`. However, it is far more appropriate to use `typeof x === 'number' && isNaN(x)` or the [Number.isNaN ES2015 function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) for that use case rather than leaving the reader of the code to determine the intent of self comparison.
 
@@ -24,10 +25,6 @@ if (x === x) {
     x = 20;
 }
 ```
-
-## Further Reading
-
-* [Weird Relation](http://jslinterrors.com/weird-relation/)
 
 ## Version
 

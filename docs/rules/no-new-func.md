@@ -1,6 +1,7 @@
 ---
-title: Rule no-new-func
+title: no-new-func - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-new-func.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -40,10 +41,6 @@ var x = function (a, b) {
 ## When Not To Use It
 
 In more advanced cases where you really need to use the `Function` constructor.
-
-## Further Reading
-
-* [The Function constructor is eval](http://jslinterrors.com/the-function-constructor-is-eval/)
 
 ## Version
 

@@ -1,6 +1,7 @@
 ---
-title: Rule no-sync
+title: no-sync - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-sync.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -12,17 +13,23 @@ In Node.js, most I/O is done through asynchronous methods. However, there are of
 
 This rule is aimed at preventing synchronous methods from being called in Node.js. It looks specifically for the method suffix "`Sync`" (as is the convention with Node.js operations).
 
-Examples of **incorrect** code for this rule:
+## Options
+
+This rule has an optional object option `{ allowAtRootLevel: <boolean> }`, which determines whether synchronous methods should be allowed at the top level of a file, outside of any functions. This option defaults to `false`.
+
+Examples of **incorrect** code for this rule with the default `{ allowAtRootLevel: false }` option:
 
 ```js
 /*eslint no-sync: "error"*/
 
 fs.existsSync(somePath);
 
-var contents = fs.readFileSync(somePath).toString();
+function foo() {
+  var contents = fs.readFileSync(somePath).toString();
+}
 ```
 
-Examples of **correct** code for this rule:
+Examples of **correct** code for this rule with the default `{ allowAtRootLevel: false }` option:
 
 ```js
 /*eslint no-sync: "error"*/
@@ -34,9 +41,29 @@ async(function() {
 });
 ```
 
+Examples of **incorrect** code for this rule with the `{ allowAtRootLevel: true }` option
+
+```js
+/*eslint no-sync: ["error", { allowAtRootLevel: true }]*/
+
+function foo() {
+  var contents = fs.readFileSync(somePath).toString();
+}
+
+var bar = baz => fs.readFileSync(qux);
+```
+
+Examples of **correct** code for this rule with the `{ allowAtRootLevel: true }` option
+
+```js
+/*eslint no-sync: ["error", { allowAtRootLevel: true }]*/
+
+fs.readFileSync(somePath).toString();
+```
+
 ## When Not To Use It
 
-If you want to allow synchronous operations in your script.
+If you want to allow synchronous operations in your script, do not enable this rule.
 
 ## Version
 

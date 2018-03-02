@@ -1,6 +1,7 @@
 ---
-title: Rule guard-for-in
+title: guard-for-in - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/guard-for-in.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -13,6 +14,8 @@ for (key in foo) {
     doSomething(key);
 }
 ```
+
+Note that simply checking `foo.hasOwnProperty(key)` is likely to cause an error in some cases; see [no-prototype-builtins](no-prototype-builtins).
 
 ## Rule Details
 
@@ -34,16 +37,23 @@ Examples of **correct** code for this rule:
 /*eslint guard-for-in: "error"*/
 
 for (key in foo) {
+    if (Object.prototype.hasOwnProperty.call(foo, key)) {
+        doSomething(key);
+    }
     if ({}.hasOwnProperty.call(foo, key)) {
         doSomething(key);
     }
 }
 ```
 
+## Related Rules
+
+* [no-prototype-builtins](no-prototype-builtins)
+
 ## Further Reading
 
-* [Exploring JavaScript for-in loops](http://javascriptweblog.wordpress.com/2011/01/04/exploring-javascript-for-in-loops/)
-* [The pitfalls of using objects as maps in JavaScript](http://www.2ality.com/2012/01/objects-as-maps.html)
+* [Exploring JavaScript for-in loops](https://javascriptweblog.wordpress.com/2011/01/04/exploring-javascript-for-in-loops/)
+* [The pitfalls of using objects as maps in JavaScript](http://2ality.com/2012/01/objects-as-maps.html)
 
 ## Version
 

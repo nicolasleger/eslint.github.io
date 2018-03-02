@@ -1,12 +1,15 @@
 ---
-title: Rule no-lonely-if
+title: no-lonely-if - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-lonely-if.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow `if` as the Only Statement in an `else` Block (no-lonely-if)
+# disallow `if` statements as the only statement in `else` blocks (no-lonely-if)
 
-If an `if` statement is the only statement in the `else` block of a parent `if` statement, it is often clearer to combine the two to using `else if` form.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
+
+If an `if` statement is the only statement in the `else` block, it is often clearer to use an `else if` form.
 
 ```js
 if (foo) {
@@ -30,9 +33,9 @@ if (foo) {
 
 ## Rule Details
 
-This rule warns when an `if` statement's `else` block contains only another `if` statement.
+This rule disallows `if` statements as the only statement in `else` blocks.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-lonely-if: "error"*/
@@ -56,7 +59,7 @@ if (condition) {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-lonely-if: "error"*/

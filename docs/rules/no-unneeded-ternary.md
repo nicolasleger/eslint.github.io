@@ -1,10 +1,13 @@
 ---
-title: Rule no-unneeded-ternary
+title: no-unneeded-ternary - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-unneeded-ternary.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow conditional expressions that can be expressed with simpler constructs (no-unneeded-ternary)
+# disallow ternary operators when simpler alternatives exist (no-unneeded-ternary)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 It's a common mistake in JavaScript to use a conditional expression to select between two Boolean values instead of using ! to convert the test to a Boolean.
 Here are some examples:
@@ -24,8 +27,6 @@ var isNo = answer === 1 ? false : true;
 var isNo = answer !== 1;
 ```
 
-This rule disallows the use of 'Boolean' literals inside conditional expressions.
-
 Another common mistake is using a single variable as both the conditional test and the consequent. In such cases, the logical `OR` can be used to provide the same functionality.
 Here is an example:
 
@@ -37,13 +38,11 @@ var foo = bar ? bar : 1;
 var foo = bar || 1;
 ```
 
-This rule disallows the conditional expression as a default assignment pattern when the `defaultAssignment` option is set to `false`.
-
 ## Rule Details
 
-This rule enforces a coding style where it disallows conditional expressions that can be implemented using simpler language constructs. Specifically, this rule disallows the use of Boolean literals inside conditional expressions, and conditional expressions where a single variable is used as both the test and consequent. This rule's default options are `{"defaultAssignment": true }`.
+This rule disallow ternary operators when simpler alternatives exist.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-unneeded-ternary: "error"*/
@@ -53,13 +52,7 @@ var a = x === 2 ? true : false;
 var a = x ? true : false;
 ```
 
-The following pattern is considered a warning when `defaultAssignment` is `false`:
-
-```js
-var a = x ? x : 1;
-```
-
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-unneeded-ternary: "error"*/
@@ -71,11 +64,24 @@ var a = x !== false;
 var a = x ? "Yes" : "No";
 
 var a = x ? y : x;
+
+var a = x ? x : 1;
 ```
 
-The following pattern is not considered a warning when `defaultAssignment` is `true`:
+## Options
+
+This rule has an object option:
+
+* `"defaultAssignment": true` (default) allows the conditional expression as a default assignment pattern
+* `"defaultAssignment": false` disallows the conditional expression as a default assignment pattern
+
+### defaultAssignment
+
+Examples of additional **incorrect** code for this rule with the `{ "defaultAssignment": false }` option:
 
 ```js
+/*eslint no-unneeded-ternary: ["error", { "defaultAssignment": false }]*/
+
 var a = x ? x : 1;
 ```
 

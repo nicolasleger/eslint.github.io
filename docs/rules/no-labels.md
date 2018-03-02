@@ -1,6 +1,7 @@
 ---
-title: Rule no-labels
+title: no-labels - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-labels.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -93,7 +94,7 @@ However, this way is ultra rare, not well-known, so this would be confusing deve
 
 ### allowLoop
 
-Examples of **correct** code for the { "allowLoop": true } option:
+Examples of **correct** code for the `{ "allowLoop": true }` option:
 
 ```js
 /*eslint no-labels: ["error", { "allowLoop": true }]*/
@@ -106,7 +107,7 @@ label:
 
 ### allowSwitch
 
-Examples of **correct** code for the { "allowSwitch": true } option:
+Examples of **correct** code for the `{ "allowSwitch": true }` option:
 
 ```js
 /*eslint no-labels: ["error", { "allowSwitch": true }]*/

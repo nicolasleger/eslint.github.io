@@ -1,6 +1,7 @@
 ---
-title: Rule no-implied-eval
+title: no-implied-eval - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-implied-eval.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -63,10 +64,6 @@ setInterval(function() {
 ## When Not To Use It
 
 If you want to allow `setTimeout()` and `setInterval()` with string arguments, then you can safely disable this rule.
-
-## Further Reading
-
-* [Implied eval is evil. Pass a function instead of a string.](http://jslinterrors.com/implied-eval-is-evil-pass-a-function-instead-of-a-string/)
 
 ## Related Rules
 

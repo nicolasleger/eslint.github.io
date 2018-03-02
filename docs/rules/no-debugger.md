@@ -1,24 +1,46 @@
 ---
-title: Rule no-debugger
+title: no-debugger - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-debugger.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow debugger (no-debugger)
+# disallow the use of `debugger` (no-debugger)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 The `debugger` statement is used to tell the executing JavaScript environment to stop execution and start up a debugger at the current point in the code. This has fallen out of favor as a good practice with the advent of modern debugging and development tools. Production code should definitely not contain `debugger`, as it will cause the browser to stop executing code and open an appropriate debugger.
 
-```js
-debugger;
-```
-
 ## Rule Details
 
-This rule is aimed at eliminating `debugger` references from your JavaScript. As such, it warns whenever it sees `debugger` used as an identifier in code.
+This rule disallows `debugger` statements.
+
+Example of **incorrect** code for this rule:
+
+```js
+/*eslint no-debugger: "error"*/
+
+function isTruthy(x) {
+    debugger;
+    return Boolean(x);
+}
+```
+
+Example of **correct** code for this rule:
+
+```js
+/*eslint no-debugger: "error"*/
+
+function isTruthy(x) {
+    return Boolean(x); // set a breakpoint at this line
+}
+```
 
 ## When Not To Use It
 
-If your code is still very much in development and don't want to worry about stripping about `debugger` statements, then turn this rule off. You'll generally want to turn it back on when testing code prior to deployment.
+If your code is still very much in development and don't want to worry about stripping `debugger` statements, then turn this rule off. You'll generally want to turn it back on when testing code prior to deployment.
 
 ## Further Reading
 

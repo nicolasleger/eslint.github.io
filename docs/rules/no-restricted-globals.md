@@ -1,6 +1,7 @@
 ---
-title: Rule no-restricted-globals
+title: no-restricted-globals - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-restricted-globals.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -19,7 +20,35 @@ This rule allows you to specify global variable names that you don't want to use
 
 ## Options
 
-This rule takes a list of strings which are the global variable names.
+This rule takes a list of strings, where each string is a global to be restricted:
+
+```json
+{
+    "rules": {
+        "no-restricted-globals": ["error", "event", "fdescribe"]
+    }
+}
+```
+
+Alternatively, the rule also accepts objects, where the global name and an optional custom message are specified:
+
+```json
+{
+    "rules": {
+        "no-restricted-globals": [
+            "error",
+            {
+                "name": "event",
+                "message": "Use local parameter instead."
+            },
+            {
+                "name": "fdescribe",
+                "message": "Do not commit fdescribe. Use describe instead."
+            }
+        ]
+    }
+}
+```
 
 Examples of **incorrect** code for sample `"event", "fdescribe"` global variable names:
 
@@ -50,6 +79,22 @@ import event from "event-module";
 
 var event = 1;
 ```
+
+Examples of **incorrect** code for a sample `"event"` global variable name, along with a custom error message:
+
+```js
+/*global event*/
+/* eslint no-restricted-globals: ["error", { name: "error", message: "Use local parameter instead." }] */
+
+function onClick() {
+    console.log(event);    // Unexpected global variable 'event'. Use local parameter instead.
+}
+```
+
+## Related Rules
+
+* [no-restricted-properties](no-restricted-properties)
+* [no-restricted-syntax](no-restricted-syntax)
 
 ## Version
 

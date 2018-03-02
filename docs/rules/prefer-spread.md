@@ -1,10 +1,13 @@
 ---
-title: Rule prefer-spread
+title: prefer-spread - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/prefer-spread.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Suggest using the spread operator instead of `.apply()`. (prefer-spread)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Before ES2015, one must use `Function.prototype.apply()` to call variadic functions.
 
@@ -24,24 +27,28 @@ Math.max(...args);
 
 ## Rule Details
 
-This rule is aimed to flag usage of `Function.prototype.apply()` that can be replaced with the spread operator.
+This rule is aimed to flag usage of `Function.prototype.apply()` in situations where the spread operator could be used instead.
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint prefer-spread: "error"*/
 
 foo.apply(undefined, args);
-
 foo.apply(null, args);
-
 obj.foo.apply(obj, args);
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint prefer-spread: "error"*/
+
+// Using the spread operator
+foo(...args);
+obj.foo(...args);
 
 // The `this` binding is different.
 foo.apply(obj, args);
@@ -57,8 +64,7 @@ obj.foo.apply(obj, [1, 2, 3]);
 
 Known limitations:
 
-This rule analyzes code statically to check whether or not the `this` argument is changed.
-So if the `this` argument is computed in a dynamic expression, this rule cannot detect a violation.
+This rule analyzes code statically to check whether or not the `this` argument is changed. So, if the `this` argument is computed in a dynamic expression, this rule cannot detect a violation.
 
 ```js
 /*eslint prefer-spread: "error"*/

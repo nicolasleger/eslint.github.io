@@ -1,12 +1,15 @@
 ---
-title: Rule no-unreachable
+title: no-unreachable - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-unreachable.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Unreachable Code (no-unreachable)
+# disallow unreachable code after `return`, `throw`, `continue`, and `break` statements (no-unreachable)
 
-A number of statements unconditionally exit a block of code. Any statements after that will not be executed and may be an error. The presence of unreachable code is usually a sign of a coding error.
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+Because the `return`, `throw`, `break`, and `continue` statements unconditionally exit a block of code, any statements after them cannot be executed. Unreachable statements are usually a mistake.
 
 ```js
 function fn() {
@@ -18,7 +21,7 @@ function fn() {
 
 ## Rule Details
 
-This rule is aimed at detecting unreachable code. It produces an error when a statements exist after a `return`, `throw`, `break`, or `continue` statement.
+This rule disallows unreachable code after `return`, `throw`, `continue`, and `break` statements.
 
 Examples of **incorrect** code for this rule:
 

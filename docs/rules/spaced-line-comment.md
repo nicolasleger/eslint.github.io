@@ -1,12 +1,13 @@
 ---
-title: Rule spaced-line-comment
+title: spaced-line-comment - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/spaced-line-comment.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Requires or disallows a whitespace (space or tab) beginning a single-line comment (spaced-line-comment)
+# spaced-line-comment: enforce consistent spacing after `//` in line comments
 
-**Replacement notice**: This rule was removed in ESLint v1.0 and replaced by the [spaced-comment](spaced-comment) rule.
+(removed) This rule was **removed** in ESLint v1.0 and **replaced** by the [spaced-comment](spaced-comment) rule.
 
 Some style guides require or disallow a whitespace immediately after the initial `//` of a line comment.
 Whitespace after the `//` makes it easier to read text in comments.
@@ -26,7 +27,7 @@ The value is an array of string patterns which are considered exceptions to the 
 It is important to note that the exceptions are ignored if the first argument is `"never"`.
 Exceptions cannot be mixed.
 
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule:
 
 ```js
 // When ["never"]
@@ -46,7 +47,7 @@ var foo = 5;
 //------++++++++
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 // When ["always"]

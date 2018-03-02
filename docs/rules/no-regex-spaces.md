@@ -1,10 +1,15 @@
 ---
-title: Rule no-regex-spaces
+title: no-regex-spaces - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-regex-spaces.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Spaces in Regular Expressions (no-regex-spaces)
+# disallow multiple spaces in regular expression literals (no-regex-spaces)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 Regular expressions can be very complex and difficult to understand, which is why it's important to keep them as simple as possible in order to avoid mistakes. One of the more error-prone things you can do with a regular expression is to use more than one space, such as:
 
@@ -22,7 +27,7 @@ Now it is very clear that three spaces are expected to be matched.
 
 ## Rule Details
 
-This rule aims to eliminate errors due to multiple spaces inside of a regular expression. As such, it warns whenever more than one space in a row is found inside of a regular expression literal.
+This rule disallows multiple spaces in regular expression literals.
 
 Examples of **incorrect** code for this rule:
 
@@ -30,6 +35,7 @@ Examples of **incorrect** code for this rule:
 /*eslint no-regex-spaces: "error"*/
 
 var re = /foo   bar/;
+var re = new RegExp("foo   bar");
 ```
 
 Examples of **correct** code for this rule:
@@ -38,17 +44,12 @@ Examples of **correct** code for this rule:
 /*eslint no-regex-spaces: "error"*/
 
 var re = /foo {3}bar/;
-
-var re = new RegExp("foo   bar");
+var re = new RegExp("foo {3}bar");
 ```
 
 ## When Not To Use It
 
 If you want to allow multiple spaces in a regular expression, then you can safely turn this rule off.
-
-## Further Reading
-
-* [Spaces are hard to count](http://jslinterrors.com/spaces-are-hard-to-count-use-a/)
 
 ## Related Rules
 

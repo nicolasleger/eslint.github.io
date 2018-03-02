@@ -1,10 +1,13 @@
 ---
-title: Rule no-dupe-class-members
+title: no-dupe-class-members - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-dupe-class-members.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Disallow duplicate name in class members (no-dupe-class-members)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 If there are declarations of the same name in class members, the last declaration overwrites other declarations silently.
 It can cause unexpected behaviors.
@@ -25,7 +28,9 @@ foo.bar(); // goodbye
 
 This rule is aimed to flag the use of duplicate names in class members.
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-dupe-class-members: "error"*/
@@ -47,7 +52,7 @@ class Foo {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-dupe-class-members: "error"*/

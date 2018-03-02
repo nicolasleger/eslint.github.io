@@ -1,10 +1,13 @@
 ---
-title: Rule no-var
+title: no-var - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-var.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # require `let` or `const` instead of `var` (no-var)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 ECMAScript 6 allows programmers to create variables with block scope instead of function scope using the `let`
 and `const` keywords. Block scope is common in many other programming languages and helps programmers avoid mistakes
@@ -15,7 +18,7 @@ var count = people.length;
 var enoughFood = count > sandwiches.length;
 
 if (enoughFood) {
-    var count = sandwiches.length; // accidently overriding the count variable
+    var count = sandwiches.length; // accidentally overriding the count variable
     console.log("We have " + count + " sandwiches for everyone. Plenty for all!");
 }
 
@@ -27,7 +30,9 @@ console.log("We have " + count + " people and " + sandwiches.length + " sandwich
 
 This rule is aimed at discouraging the use of `var` and encouraging the use of `const` or `let` instead.
 
-The following patterns are considered problems:
+## Examples
+
+Examples of **incorrect** code for this rule:
 
 ```js
 /*eslint no-var: "error"*/
@@ -36,7 +41,7 @@ var x = "y";
 var CONFIG = {};
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule:
 
 ```js
 /*eslint no-var: "error"*/

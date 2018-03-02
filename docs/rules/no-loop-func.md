@@ -1,6 +1,7 @@
 ---
-title: Rule no-loop-func
+title: no-loop-func - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-loop-func.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
@@ -94,10 +95,6 @@ for (let i=10; i; i--) {
 }
 //... no modifications of foo after this loop ...
 ```
-
-## Further Reading
-
-* [Don't make functions within a loop](http://jslinterrors.com/dont-make-functions-within-a-loop/)
 
 ## Version
 

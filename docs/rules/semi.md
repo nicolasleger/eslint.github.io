@@ -1,12 +1,13 @@
 ---
-title: Rule semi
+title: semi - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/semi.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Enforce or Disallow Semicolons (semi)
+# require or disallow semicolons instead of ASI (semi)
 
-(fixable) The --fix option on the [command line](../user-guide/command-line-interface#fix) automatically fixes problems reported by this rule.
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 JavaScript is unique amongst the C-like languages in that it doesn't require semicolons at the end of each statement. In many cases, the JavaScript engine can determine that a semicolon should be in a certain spot and will automatically add it. This feature is known as **automatic semicolon insertion (ASI)** and is considered one of the more controversial features of JavaScript. For example, the following lines are both valid:
 
@@ -63,26 +64,33 @@ Although ASI allows for more freedom over your coding style, it can also make yo
 
 ## Rule Details
 
-This rule is aimed at ensuring consistent use of semicolons. You can decide whether or not to require semicolons at the end of statements.
+This rule enforces consistent use of semicolons.
 
 ## Options
 
-The rule takes one or two options. The first one is a string, which could be `"always"` or `"never"`. The default is `"always"`. The second one is an object for more fine-grained configuration when the first option is `"always"`.
+This rule has two options, a string option and an object option.
 
-You can set the option in configuration like this:
+String option:
 
-### "always"
+* `"always"` (default) requires semicolons at the end of statements
+* `"never"` disallows semicolons as the end of statements (except to disambiguate statements beginning with `[`, `(`, `/`, `+`, or `-`)
 
-By using the default option, semicolons must be used any place where they are valid.
+Object option (when `"always"`):
 
-```json
-semi: ["error", "always"]
-```
+* `"omitLastInOneLineBlock": true` ignores the last semicolon in a block in which its braces (and therefore the content of the block) are in the same line
 
-The following patterns are considered problems:
+Object option (when `"never"`):
+
+* `"beforeStatementContinuationChars": "any"` (default) ignores semicolons (or lacking semicolon) at the end of statements if the next line starts with `[`, `(`, `/`, `+`, or `-`.
+* `"beforeStatementContinuationChars": "always"` requires semicolons at the end of statements if the next line starts with `[`, `(`, `/`, `+`, or `-`.
+* `"beforeStatementContinuationChars": "never"` disallows semicolons as the end of statements if it doesn't make ASI hazard even if the next line starts with `[`, `(`, `/`, `+`, or `-`.
+
+### always
+
+Examples of **incorrect** code for this rule with the default `"always"` option:
 
 ```js
-/*eslint semi: "error"*/
+/*eslint semi: ["error", "always"]*/
 
 var name = "ESLint"
 
@@ -91,7 +99,7 @@ object.method = function() {
 }
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the default `"always"` option:
 
 ```js
 /*eslint semi: "error"*/
@@ -103,27 +111,51 @@ object.method = function() {
 };
 ```
 
-#### Fine-grained control
+### never
 
-When setting the first option as "always", an additional option can be added to omit the last semicolon in a one-line block, that is, a block in which its braces (and therefore the content of the block) are in the same line:
-
-```json
-semi: ["error", "always", { "omitLastInOneLineBlock": true}]
-```
-
-The following patterns are considered problems:
+Examples of **incorrect** code for this rule with the `"never"` option:
 
 ```js
-/*eslint semi: ["error", "always", { "omitLastInOneLineBlock": true}] */
+/*eslint semi: ["error", "never"]*/
 
-if (foo) {
-    bar()
-}
+var name = "ESLint";
 
-if (foo) { bar(); }
+object.method = function() {
+    // ...
+};
 ```
 
-The following patterns are not considered problems:
+Examples of **correct** code for this rule with the `"never"` option:
+
+```js
+/*eslint semi: ["error", "never"]*/
+
+var name = "ESLint"
+
+object.method = function() {
+    // ...
+}
+
+var name = "ESLint"
+
+;(function() {
+    // ...
+})()
+
+import a from "a"
+(function() {
+    // ...
+})()
+
+import b from "b"
+;(function() {
+    // ...
+})()
+```
+
+#### omitLastInOneLineBlock
+
+Examples of additional **correct** code for this rule with the `"always", { "omitLastInOneLineBlock": true }` options:
 
 ```js
 /*eslint semi: ["error", "always", { "omitLastInOneLineBlock": true}] */
@@ -133,44 +165,24 @@ if (foo) { bar() }
 if (foo) { bar(); baz() }
 ```
 
-### "never"
+#### beforeStatementContinuationChars
 
-If you want to enforce that semicolons are never used, switch the configuration to:
-
-```json
-semi: [2, "never"]
-```
-
-Then, the following patterns are considered problems:
+Examples of additional **incorrect** code for this rule with the `"never", { "beforeStatementContinuationChars": "always" }` options:
 
 ```js
-/*eslint semi: ["error", "never"]*/
+/*eslint semi: ["error", "never", { "beforeStatementContinuationChars": "always"}] */
+import a from "a"
 
-var name = "ESLint";
-
-object.method = function() {
+(function() {
     // ...
-};
+})()
 ```
 
-And the following patterns are not considered problems:
+Examples of additional **incorrect** code for this rule with the `"never", { "beforeStatementContinuationChars": "never" }` options:
 
 ```js
-/*eslint semi: ["error", "never"]*/
-
-var name = "ESLint"
-
-object.method = function() {
-    // ...
-}
-```
-
-Even in `"never"` mode, semicolons are still allowed to disambiguate statements beginning with `[`, `(`, `/`, `+`, or `-`:
-
-```js
-/*eslint semi: ["error", "never"]*/
-
-var name = "ESLint"
+/*eslint semi: ["error", "never", { "beforeStatementContinuationChars": "never"}] */
+import a from "a"
 
 ;(function() {
     // ...
@@ -185,7 +197,6 @@ If you do not want to enforce semicolon usage (or omission) in any particular wa
 
 * [An Open Letter to JavaScript Leaders Regarding Semicolons](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding)
 * [JavaScript Semicolon Insertion](http://inimino.org/~inimino/blog/javascript_semicolons)
-* [Understanding Automatic Semicolon Insertion in JavaScript](http://jamesallardice.com/understanding-automatic-semi-colon-insertion-in-javascript/)
 
 ## Related Rules
 

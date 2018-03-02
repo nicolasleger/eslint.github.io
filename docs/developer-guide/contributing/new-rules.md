@@ -1,7 +1,10 @@
 ---
 title: New Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/developer-guide/contributing/new-rules.md
 ---
+<!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
+
 # New Rules
 
 ESLint is all about rules. For most of the project's lifetime, we've had over 200 rules, and that list continues to grow. However, we can't just accept any proposed rule because all rules need to work cohesively together. As such, we have some guidelines around which rules can be part of the ESLint core and which are better off as custom rules and plugins.
@@ -23,12 +26,7 @@ Even though these are the formal criteria for inclusion, each rule is evaluated 
 
 ## Proposing a Rule
 
-If you want to propose a new rule, [create an issue](https://github.com/eslint/eslint/issues/new?body=**When%20does%20this%20rule%20warn%3F%20Please%20describe%20and%20show%20example%20code%3A**%0A%0A**Is%20this%20rule%20preventing%20an%20error%20or%20is%20it%20stylistic%3F**%0A%0A**Why%20is%20this%20rule%20a%20candidate%20for%20inclusion%20instead%20of%20creating%20a%20custom%20rule%3F**%0A%0A**Are%20you%20willing%20to%20create%20the%20rule%20yourself%3F**%0A%0A) be sure to include:
-
-1. When the rules will warn. Include a description as well as sample code.
-1. Whether the rule prevents an error or is stylistic.
-1. Why the rule should be in the core instead of creating a custom rule.
-1. Are you willing to create the rule yourself?
+If you want to propose a new rule, [create a pull request](/docs/developer-guide/contributing/pull-requests) or [new issue](https://github.com/eslint/eslint/issues/new?template=NEW_RULE.md) and fill out the template.
 
 We need all of this information in order to determine whether or not the rule is a good core rule candidate.
 

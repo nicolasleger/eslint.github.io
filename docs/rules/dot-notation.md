@@ -1,10 +1,13 @@
 ---
-title: Rule dot-notation
+title: dot-notation - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/dot-notation.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
 # Require Dot Notation (dot-notation)
+
+(fixable) The `--fix` option on the [command line](../user-guide/command-line-interface#fix) can automatically fix some of the problems reported by this rule.
 
 In JavaScript, one can access properties using the dot notation (`foo.bar`) or square-bracket notation (`foo["bar"]`). However, the dot notation is often preferred because it is easier to read, less verbose, and works better with aggressive JavaScript minimizers.
 
@@ -54,7 +57,7 @@ var x = foo["class"]; // Property name is a reserved word, square-bracket notati
 
 ### allowPattern
 
-For example, when preparing data to be sent to an external API, it is often required to use property names that include underscores.  If the `camelcase` rule is in effect, these [snake case](http://en.wikipedia.org/wiki/Snake_case) properties would not be allowed.  By providing an `allowPattern` to the `dot-notation` rule, these snake case properties can be accessed with bracket notation.
+For example, when preparing data to be sent to an external API, it is often required to use property names that include underscores.  If the `camelcase` rule is in effect, these [snake case](https://en.wikipedia.org/wiki/Snake_case) properties would not be allowed.  By providing an `allowPattern` to the `dot-notation` rule, these snake case properties can be accessed with bracket notation.
 
 Examples of **correct** code for the sample `{ "allowPattern": "^[a-z]+(_[a-z]+)+$" }` option:
 

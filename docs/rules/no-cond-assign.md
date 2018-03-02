@@ -1,10 +1,13 @@
 ---
-title: Rule no-cond-assign
+title: no-cond-assign - Rules
 layout: doc
+edit_link: https://github.com/eslint/eslint/edit/master/docs/rules/no-cond-assign.md
 ---
 <!-- Note: No pull requests accepted for this file. See README.md in the root directory for details. -->
 
-# Disallow Assignment in Conditional Statements (no-cond-assign)
+# disallow assignment operators in conditional statements (no-cond-assign)
+
+(recommended) The `"extends": "eslint:recommended"` property in a configuration file enables this rule.
 
 In conditional statements, it is very easy to mistype a comparison operator (such as `==`) as an assignment operator (such as `=`). For example:
 
@@ -19,20 +22,18 @@ There are valid reasons to use assignment operators in conditional statements. H
 
 ## Rule Details
 
-This rule is aimed at eliminating ambiguous assignments in `for`, `if`, `while`, and `do...while` conditional statements.
+This rule disallows ambiguous assignment operators in test conditions of `if`, `for`, `while`, and `do...while` statements.
 
 ## Options
 
-The rule takes one option, a string, which must contain one of the following values:
+This rule has a string option:
 
-* `except-parens` (default): Disallow assignments unless they are enclosed in parentheses.
-* `always`: Disallow all assignments.
+* `"except-parens"` (default) allows assignments in test conditions *only if* they are enclosed in parentheses (for example, to allow reassigning a variable in the test of a `while` or `do...while` loop)
+* `"always"` disallows all assignments in test conditions
 
 ### except-parens
 
-The default `"except-parens"` option disallows assignment expressions unless they are enclosed in parentheses. It allows common patterns, such as reassigning a value in the condition of a `while` or `do...while` loop.
-
-Examples of **incorrect** code for the default `"except-parens"` option:
+Examples of **incorrect** code for this rule with the default `"except-parens"` option:
 
 ```js
 /*eslint no-cond-assign: "error"*/
@@ -52,7 +53,7 @@ function setHeight(someNode) {
 }
 ```
 
-Examples of **correct** code for the default `"except-parens"` option:
+Examples of **correct** code for this rule with the default `"except-parens"` option:
 
 ```js
 /*eslint no-cond-assign: "error"*/
@@ -82,9 +83,7 @@ function setHeight(someNode) {
 
 ### always
 
-The `"always"` option disallows assignment expressions in the test of a conditional statement.
-
-Examples of **incorrect** code for the `"always"` option:
+Examples of **incorrect** code for this rule with the `"always"` option:
 
 ```js
 /*eslint no-cond-assign: ["error", "always"]*/
@@ -120,7 +119,7 @@ function setHeight(someNode) {
 }
 ```
 
-Examples of **correct** code for the `"always"` option:
+Examples of **correct** code for this rule with the `"always"` option:
 
 ```js
 /*eslint no-cond-assign: ["error", "always"]*/
@@ -131,10 +130,6 @@ if (x === 0) {
     var b = 1;
 }
 ```
-
-## Further Reading
-
-* [JSLint -- Unexpected assignment expression](http://jslinterrors.com/unexpected-assignment-expression/)
 
 ## Related Rules
 
